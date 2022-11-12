@@ -22,3 +22,22 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*menu bar items*/
+.menubtn {
+    position: absolute;
+    float: left;
+}
+
+.btn-whte {
+    color: white;
+    font-size: medium;
+}
+
+    .btn-whte::after {
+        color: white;
+    }
+
+    .btn-whte:hover {
+        color: white;
+    }
