@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<Riverside_Hodlings___System01___Db2___Ent_Framework.Models.CLIENT>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewBag.Title = "Clients";
+}
+<style>
+    @@media only screen and (max-width: 600px) {
+        .smallscreennotshow {
+            display: none
+        }
+    }
+</style>
+
+<h2>Riverside Holdings Clients</h2>
+
+@using (Html.BeginForm())
+{
+    <p class="form-inline">
+        <input type="text" class="form-control" placeholder="Enter client name..." name="searchString" />
+        <input type="submit" class="btn btn-primary" value="Find Client" />
+    </p>
+}
+<br />
+
+<table class="table table-striped">
+    <thead class="table bg-dark text-light">
+        <tr>
+            <th>Name</th>
+            <th class="smallscreennotshow">Email</th>
+            <th>Phone Number</th>
+            <th class="smallscreennotshow">Physical address</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+
+            <tr>
+                <td>@client.NAME</td>
+                <td class="smallscreennotshow">@client.EMAIL</td>
+                <td>@client.PHONE_NUMBER</td>
+                <td class="smallscreennotshow">@client.ADDRESS</td>
+                <td>
+                    @Html.ActionLink("Details", "ClDetail", "Home", new { id = client.CLIENT_ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Edit", "Edit", "Home", new { id = client.CLIENT_ID }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", "Home", new { id = client.CLIENT_ID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Clients", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
