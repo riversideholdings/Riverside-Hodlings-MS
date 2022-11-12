@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Riverside_HoldingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMINISTRATORS">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="NAME" Type="char" MaxLength="50" />
+          <Property Name="SURNAME" Type="char" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="30" />
+          <Property Name="PHONE_NUMBER" Type="char" MaxLength="10" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="CLIENT_PAYMENTS">
+          <Key>
+            <PropertyRef Name="PAYMENT_ID" />
+          </Key>
+          <Property Name="PAYMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DATE" Type="date" />
+          <Property Name="DESCRIPTION" Type="char" MaxLength="100" />
+          <Property Name="AMOUNT" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CLIENT_ID" Type="char" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTS">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="NAME" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="char" MaxLength="10" />
+          <Property Name="EMAIL" Type="char" MaxLength="30" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="50" />
+          <Property Name="CONTACT_PERSON" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="INVOICE_ITEM">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INVOICE_NUM" Type="char" MaxLength="20" />
+          <Property Name="PRD_CODE" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="QUANTITY" Type="int" />
+        </EntityType>
+        <EntityType Name="INVOICE_NOTES">
+          <Key>
+            <PropertyRef Name="NOTE_ID" />
+          </Key>
+          <Property Name="NOTE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INVOICE_NUM" Type="char" MaxLength="20" />
+          <Property Name="DESCRIPTION" Type="char" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="INVOICES">
+          <Key>
+            <PropertyRef Name="INVOICE_NUM" />
+          </Key>
+          <Property Name="INVOICE_NUM" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="CLIENT_ID" Type="char" MaxLength="9" />
+          <Property Name="INVOICE_DATE" Type="char" MaxLength="20" />
+          <Property Name="PRICES_USED" Type="char" MaxLength="20" />
+          <Property Name="INVOICE_TOTAL" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PAYMENT_STATUS" Type="char" MaxLength="20" />
+          <Property Name="DELIVERY_STATUS" Type="char" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="PRD_CODE" />
+          </Key>
+          <Property Name="PRD_CODE" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="PRODUCT" Type="char" MaxLength="50" />
+          <Property Name="SELLING_PRICE" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="WATERPRENEUR_PRICE" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="WHOLESALE_PRICE" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="PACK_SIZE" Type="char" MaxLength="20" />
+          <Property Name="PALLET_SIZE" Type="char" MaxLength="20" />
+          <Property Name="IMG_URL" Type="char" MaxLength="500" />
+          <Property Name="STOCK_LEVELS" Type="int" />
+        </EntityType>
+        <Association Name="FK__CLIENT_PA__CLIEN__75A278F5">
+          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="1" />
+          <End Role="CLIENT_PAYMENTS" Type="Self.CLIENT_PAYMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="CLIENT_PAYMENTS">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INVOICE_NUM">
+          <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="0..1" />
+          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVOICES">
+              <PropertyRef Name="INVOICE_NUM" />
+            </Principal>
+            <Dependent Role="INVOICE_ITEM">
+              <PropertyRef Name="INVOICE_NUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRD_CODE">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRD_CODE" />
+            </Principal>
+            <Dependent Role="INVOICE_ITEM">
+              <PropertyRef Name="PRD_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Riverside_HoldingsModelStoreContainer">
+          <EntitySet Name="ADMINISTRATORS" EntityType="Self.ADMINISTRATORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENT_PAYMENTS" EntityType="Self.CLIENT_PAYMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVOICE_ITEM" EntityType="Self.INVOICE_ITEM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVOICE_NOTES" EntityType="Self.INVOICE_NOTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVOICES" EntityType="Self.INVOICES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CLIENT_PA__CLIEN__75A278F5" Association="Self.FK__CLIENT_PA__CLIEN__75A278F5">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="CLIENT_PAYMENTS" EntitySet="CLIENT_PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="INVOICE_NUM" Association="Self.INVOICE_NUM">
+            <End Role="INVOICES" EntitySet="INVOICES" />
+            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="PRD_CODE" Association="Self.PRD_CODE">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Riverside_HoldingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMINISTRATOR">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CLIENT_PAYMENTS">
+          <Key>
+            <PropertyRef Name="PAYMENT_ID" />
+          </Key>
+          <Property Name="PAYMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DATE" Type="DateTime" Precision="0" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="AMOUNT" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CLIENT_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CLIENT" Relationship="Self.FK__CLIENT_PA__CLIEN__75A278F5" FromRole="CLIENT_PAYMENTS" ToRole="CLIENTS" />
+        </EntityType>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PHONE_NUMBER" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTACT_PERSON" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CLIENT_PAYMENTS" Relationship="Self.FK__CLIENT_PA__CLIEN__75A278F5" FromRole="CLIENTS" ToRole="CLIENT_PAYMENTS" />
+        </EntityType>
+        <EntityType Name="INVOICE_ITEM">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INVOICE_NUM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="PRD_CODE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <NavigationProperty Name="INVOICE" Relationship="Self.INVOICE_NUM" FromRole="INVOICE_ITEM" ToRole="INVOICES" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.PRD_CODE" FromRole="INVOICE_ITEM" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="INVOICE_NOTES">
+          <Key>
+            <PropertyRef Name="NOTE_ID" />
+          </Key>
+          <Property Name="NOTE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INVOICE_NUM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="INVOICE">
+          <Key>
+            <PropertyRef Name="INVOICE_NUM" />
+          </Key>
+          <Property Name="INVOICE_NUM" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CLIENT_ID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="INVOICE_DATE" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="PRICES_USED" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="INVOICE_TOTAL" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PAYMENT_STATUS" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="DELIVERY_STATUS" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="INVOICE_ITEM" Relationship="Self.INVOICE_NUM" FromRole="INVOICES" ToRole="INVOICE_ITEM" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRD_CODE" />
+          </Key>
+          <Property Name="PRD_CODE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PRODUCT1" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="SELLING_PRICE" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="WATERPRENEUR_PRICE" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="WHOLESALE_PRICE" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PACK_SIZE" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="PALLET_SIZE" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="IMG_URL" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+          <Property Name="STOCK_LEVELS" Type="Int32" />
+          <NavigationProperty Name="INVOICE_ITEM" Relationship="Self.PRD_CODE" FromRole="PRODUCTS" ToRole="INVOICE_ITEM" />
+        </EntityType>
+        <Association Name="FK__CLIENT_PA__CLIEN__75A278F5">
+          <End Role="CLIENTS" Type="Self.CLIENT" Multiplicity="1" />
+          <End Role="CLIENT_PAYMENTS" Type="Self.CLIENT_PAYMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="CLIENT_PAYMENTS">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INVOICE_NUM">
+          <End Role="INVOICES" Type="Self.INVOICE" Multiplicity="0..1" />
+          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVOICES">
+              <PropertyRef Name="INVOICE_NUM" />
+            </Principal>
+            <Dependent Role="INVOICE_ITEM">
+              <PropertyRef Name="INVOICE_NUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRD_CODE">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRD_CODE" />
+            </Principal>
+            <Dependent Role="INVOICE_ITEM">
+              <PropertyRef Name="PRD_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Riverside_HoldingsEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINISTRATORS" EntityType="Self.ADMINISTRATOR" />
+          <EntitySet Name="CLIENT_PAYMENTS" EntityType="Self.CLIENT_PAYMENTS" />
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENT" />
+          <EntitySet Name="INVOICE_ITEM" EntityType="Self.INVOICE_ITEM" />
+          <EntitySet Name="INVOICE_NOTES" EntityType="Self.INVOICE_NOTES" />
+          <EntitySet Name="INVOICES" EntityType="Self.INVOICE" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+          <AssociationSet Name="FK__CLIENT_PA__CLIEN__75A278F5" Association="Self.FK__CLIENT_PA__CLIEN__75A278F5">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="CLIENT_PAYMENTS" EntitySet="CLIENT_PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="INVOICE_NUM" Association="Self.INVOICE_NUM">
+            <End Role="INVOICES" EntitySet="INVOICES" />
+            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="PRD_CODE" Association="Self.PRD_CODE">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Riverside_HoldingsModelStoreContainer" CdmEntityContainer="Riverside_HoldingsEntities1">
+          <EntitySetMapping Name="ADMINISTRATORS">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.ADMINISTRATOR">
+              <MappingFragment StoreEntitySet="ADMINISTRATORS">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENT_PAYMENTS">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.CLIENT_PAYMENTS">
+              <MappingFragment StoreEntitySet="CLIENT_PAYMENTS">
+                <ScalarProperty Name="PAYMENT_ID" ColumnName="PAYMENT_ID" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+                <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTS">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENTS">
+                <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="CONTACT_PERSON" ColumnName="CONTACT_PERSON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVOICE_ITEM">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.INVOICE_ITEM">
+              <MappingFragment StoreEntitySet="INVOICE_ITEM">
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="INVOICE_NUM" ColumnName="INVOICE_NUM" />
+                <ScalarProperty Name="PRD_CODE" ColumnName="PRD_CODE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVOICE_NOTES">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.INVOICE_NOTES">
+              <MappingFragment StoreEntitySet="INVOICE_NOTES">
+                <ScalarProperty Name="NOTE_ID" ColumnName="NOTE_ID" />
+                <ScalarProperty Name="INVOICE_NUM" ColumnName="INVOICE_NUM" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVOICES">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.INVOICE">
+              <MappingFragment StoreEntitySet="INVOICES">
+                <ScalarProperty Name="INVOICE_NUM" ColumnName="INVOICE_NUM" />
+                <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+                <ScalarProperty Name="INVOICE_DATE" ColumnName="INVOICE_DATE" />
+                <ScalarProperty Name="PRICES_USED" ColumnName="PRICES_USED" />
+                <ScalarProperty Name="INVOICE_TOTAL" ColumnName="INVOICE_TOTAL" />
+                <ScalarProperty Name="PAYMENT_STATUS" ColumnName="PAYMENT_STATUS" />
+                <ScalarProperty Name="DELIVERY_STATUS" ColumnName="DELIVERY_STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTS">
+            <EntityTypeMapping TypeName="Riverside_HoldingsModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="PRD_CODE" ColumnName="PRD_CODE" />
+                <ScalarProperty Name="PRODUCT1" ColumnName="PRODUCT" />
+                <ScalarProperty Name="SELLING_PRICE" ColumnName="SELLING_PRICE" />
+                <ScalarProperty Name="WATERPRENEUR_PRICE" ColumnName="WATERPRENEUR_PRICE" />
+                <ScalarProperty Name="WHOLESALE_PRICE" ColumnName="WHOLESALE_PRICE" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="PALLET_SIZE" ColumnName="PALLET_SIZE" />
+                <ScalarProperty Name="IMG_URL" ColumnName="IMG_URL" />
+                <ScalarProperty Name="STOCK_LEVELS" ColumnName="STOCK_LEVELS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

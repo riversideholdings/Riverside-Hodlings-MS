@@ -1,0 +1,24 @@
+﻿@model List<Riverside_Hodlings___System01___Db2___Ent_Framework.Models>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Clients</h1>
+<h4>No. of clients @Model.Count</h4>
+<table class="table table-striped">
+    <thead>
+        <th><b>#</b></th>
+        <th>Client ID</th>
+        <th>Name</th>
+    </thead>
+    <tbody>
+        @foreach(var client in Model)
+            {
+                <tr>
+                    <td>@Model.Count</td>
+                    <td>@client.ClientId</td>
+                    <td>@client.Name</td>
+                </tr>
+            }
+    </tbody>
+</table>
