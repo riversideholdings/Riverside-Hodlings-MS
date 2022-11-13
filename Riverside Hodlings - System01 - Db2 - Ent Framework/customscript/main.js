@@ -1,4 +1,4 @@
-$('#sidebar').toggleClass('active');
+﻿$('#sidebar').toggleClass('active');
 (function ($) {
     "use strict"; var fullHeight = function () {
         $('.js-fullheight').css('height',
