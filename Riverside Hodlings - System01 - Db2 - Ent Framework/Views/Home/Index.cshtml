@@ -3,28 +3,79 @@
     ViewBag.Title = "Home Page";
 }
 
+@{
+    decimal allInvTotaled = 0;
+    decimal revenue = 0;
+    decimal inv = 0;
+    decimal r = 0;
+    decimal up = 0;
+    decimal unpdin = 0;
+    decimal tvoid = 0;
+    decimal vd = 0;
+
+    var paidinv = Model.Invoices.Where(i => i.PAYMENT_STATUS.Contains("Paid")).ToList();
+    var unpaidinv = Model.Invoices.Where(i => i.PAYMENT_STATUS.Contains("Awaiting Payment")).ToList();
+    var voidedinv = Model.Invoices.Where(i => i.PAYMENT_STATUS.Contains("Void")).ToList();
+
+    foreach (var invoice in Model.Invoices)
+    {
+        //allInvTotaled invoices total
+        inv = Convert.ToDecimal(invoice.INVOICE_TOTAL);
+        allInvTotaled += inv;
+    }
+
+    foreach (var paidInv in paidinv)
+    {
+        //revenue calculations
+        r = Convert.ToDecimal(paidInv.INVOICE_TOTAL);
+        revenue += r;
+    }
+
+    foreach (var unpInv in unpaidinv)
+    {
+        //revenue calculations
+        up = Convert.ToDecimal(unpInv.INVOICE_TOTAL);
+        unpdin += up;
+    }
+
+    foreach (var voided in voidedinv)
+    {
+        //revenue calculations
+        vd = Convert.ToDecimal(voided.INVOICE_TOTAL);
+        tvoid += vd;
+    }
+}
+
+
 <h2>Dashboard <i class="fa fa-tachometer"></i></h2>
-<h4>Summary info</h4>
+<h5>Summary information for @DateTime.Now.Year - Riverside Holdings</h5>
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
-                This is some text within a card body.
+                <h4><i class="fa-solid fa-file-invoice"></i>  Total value of invoices: <b>R @allInvTotaled</b></h4>
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
-                This is some text within a card body.
+                <h4><i class="fa-solid fa-money-bill-trend-up"></i>  Current Total Revenue: <b>R @revenue</b></h4>
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
-                This is some text within a card body.
+                <h4><i class="fa-solid fa-sack-xmark"></i>  Total of unpaid orders: <b>R @unpdin</b></h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-body">
+                <h4><i class="fa-solid fa-trash-can"></i> Total of voided orders: <b>R @tvoid</b></h4>
             </div>
         </div>
     </div>
