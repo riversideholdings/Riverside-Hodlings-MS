@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Riverside_Hodlings___System01___Db2___Ent_Framework.Models.INVOICE>
+﻿@model Riverside_Hodlings___System01___Db2___Ent_Framework.Models.OrdersVm
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,8 +10,54 @@
 <h2>All Orders</h2>
 
 <section>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><b>#</b></th>
+                <th>Order Number</th>
+                <th class="smallscreennotshow">Date</th>
+                <th class="smallscreennotshow">Recipient</th>
+                <th>Invoice Total</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
 
+            @foreach (var inv in Model.Invoices)
+            {
+                var colrstatus = "";
+                var num = inv.INVOICE_NUM.Substring(4,7);
+
+                if (inv.PAYMENT_STATUS == "Paid")
+                {
+                    colrstatus = "green";
+                }
+                else if (inv.PAYMENT_STATUS == "Void" || inv.PAYMENT_STATUS == "Awaiting Payment")
+                {
+                    colrstatus = "red";
+                }
+
+                <tr>
+                    <td><b>@num</b></td>
+                    <td>@inv.INVOICE_NUM</td>
+                    <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
+                    @foreach (var cli in Model.Clients)
+                    {
+                        if (inv.CLIENT_ID == cli.CLIENT_ID)
+                        {
+                            <td class="smallscreennotshow">@cli.NAME</td>
+                        }
+                    } 
+                    <td><b>R @inv.INVOICE_TOTAL</b></td>
+                    <td style="color:@colrstatus;">@inv.PAYMENT_STATUS</td>
+                    <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </section>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("AllOrders", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+Page @(Model.Invoices.PageCount < Model.Invoices.PageNumber ? 0 : Model.Invoices.PageNumber) of @Model.Invoices.PageCount
+
+@Html.PagedListPager(Model.Invoices, page => Url.Action("AllOrders", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

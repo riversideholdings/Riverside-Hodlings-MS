@@ -16,7 +16,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             var info = new DashboardVM();
             info.Admins = db.ADMINISTRATORS.ToList();
             info.Clients = db.CLIENTS.ToList();
-            info.Invoices = db.INVOICES.ToList();
+            info.Invoices = db.INVOICES.OrderByDescending(i => i.INVOICE_DATE).ToList();
             return View(info);
         }
 
@@ -56,12 +56,5 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 
             return View();
         }
-        public ActionResult Invoices()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
     }
 }

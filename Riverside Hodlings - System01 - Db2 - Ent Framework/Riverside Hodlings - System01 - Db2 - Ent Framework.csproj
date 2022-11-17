@@ -146,6 +146,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ManageClientsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -185,6 +186,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdersVm.cs" />
     <Compile Include="Models\PRODUCT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -326,6 +328,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Orders\AllOrders.cshtml" />
+    <Content Include="Views\ManageClients\AddClient.cshtml" />
+    <Content Include="Views\ManageClients\EditClient.cshtml" />
+    <Content Include="Views\ManageClients\DeleteClient.cshtml" />
+    <Content Include="Views\ManageClients\ClientDetails.cshtml" />
+    <Content Include="Views\Orders\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

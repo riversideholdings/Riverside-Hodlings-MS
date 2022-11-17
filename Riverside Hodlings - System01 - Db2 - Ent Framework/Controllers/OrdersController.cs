@@ -28,17 +28,31 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
                 searchString = currentFilter;
             }
 
-            var invoices = from c in db.INVOICES select c;
+           
+
+            var invoices = new OrdersVm();
+            invoices.Admins = db.ADMINISTRATORS.ToList();
+            invoices.Clients = db.CLIENTS.ToList();
+            invoices.Invoices = db.INVOICES.ToList().ToPagedList(pageNumber, pageSize);
 
             //return results according to search
             if (!String.IsNullOrEmpty(searchString))
             {
-                invoices = db.INVOICES.Where(i => i.INVOICE_NUM.Contains(searchString));
+                invoices.Invoices = db.INVOICES.Where(i => i.INVOICE_NUM.Contains(searchString)).ToPagedList(pageNumber,pageSize);
             }
 
             ViewBag.CurrentFilter = searchString;
 
-            return View();
+            return View(invoices);
+        }
+
+        public ActionResult OrderDetails(string Orderid)
+        {
+            var invoices = new DashboardVM();
+            invoices.Admins = db.ADMINISTRATORS.ToList();
+            invoices.Clients = db.CLIENTS.ToList();
+            invoices.Invoices = db.INVOICES.Where(o => o.INVOICE_NUM == Orderid).ToList();
+            return View(invoices);
         }
     }
 }
