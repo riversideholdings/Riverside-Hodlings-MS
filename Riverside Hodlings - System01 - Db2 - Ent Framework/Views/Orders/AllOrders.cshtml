@@ -1,0 +1,17 @@
+﻿@model PagedList.IPagedList<Riverside_Hodlings___System01___Db2___Ent_Framework.Models.INVOICE>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewBag.Title = "AllOrders";
+}
+
+<h2>All Orders</h2>
+
+<section>
+
+</section>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("AllOrders", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
