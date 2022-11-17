@@ -10798,6 +10798,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 #sidebar {
+    padding-top: 45px;
     min-width: 250px;
     max-width: 250px;
     background: #212121;
@@ -10830,7 +10831,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
             color: #fff;
             display: block;
             padding: 10px 30px;
-            background: #2f89fc
+            background: #3E85CE
         }
 
     #sidebar ul.components {
@@ -10858,8 +10859,8 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
             #sidebar ul li a:hover {
                 color: #fff;
-                background: #2f89fc;
-                border-bottom: 1px solid #2f89fc
+                background: #3E85CE;
+                border-bottom: 1px solid #3E85CE
             }
 
         #sidebar ul li.active > a {
@@ -10868,8 +10869,8 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
         }
 
             #sidebar ul li.active > a:hover {
-                background: #2f89fc;
-                border-bottom: 1px solid #2f89fc
+                background: #3E85CE;
+                border-bottom: 1px solid #3E85CE
             }
 
 @media(max-width:991.98px) {

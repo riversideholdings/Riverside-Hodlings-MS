@@ -16,7 +16,7 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $(document).ready(function () {
             console.log("ready!");
         
@@ -34,10 +34,10 @@
             });
             })(jQuery);
         });
-    </script>
+    </script>*@
 </head>
 <body>
-    <div class="navbar navbar-fixed-top" style="background-color: dodgerblue;">
+    <div class="navbar navbar-fixed-top" style="background-color: #3E85CE;">
         <div class="menubtn">
             <button type="button" id="sidebarCollapse" class="btn btn-whte">
                 <i class="fa fa-bars"></i>
@@ -48,7 +48,6 @@
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu float-left">
-
              </div>
                 <h1><a href="/Home/Index" class="logo">Riverside Holdings</a></h1>
                 <ul class="list-unstyled components mb-5">
@@ -64,6 +63,7 @@
                 </ul>
         </nav>
         <div id="content" class="p-4 p-md-5 pt-5">
+            <br /><br />
             @RenderBody()
             <hr />
             <footer>
