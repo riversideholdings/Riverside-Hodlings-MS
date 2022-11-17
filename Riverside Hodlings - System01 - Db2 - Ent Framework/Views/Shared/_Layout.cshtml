@@ -16,25 +16,6 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*<script type="text/javascript">
-        $(document).ready(function () {
-            console.log("ready!");
-        
-        $('#sidebar').toggleClass('active');
-        (function ($) {
-            "use strict"; var fullHeight = function () {
-                $('.js-fullheight').css('height',
-                    $(window).height()); $(window).resize(function () {
-                        $('.js-fullheight').css('height',
-                            $(window).height());
-                    });
-            }; fullHeight();
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-            })(jQuery);
-        });
-    </script>*@
 </head>
 <body>
     <div class="navbar navbar-fixed-top" style="background-color: #3E85CE;">
@@ -67,7 +48,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - Riverside Holdings</p>
+                <p>&copy; @DateTime.Now.Year - Riverside Holdings v1.2.0</p>
             </footer>
         </div>
     </div>
