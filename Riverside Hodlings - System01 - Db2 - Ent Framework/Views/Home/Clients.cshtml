@@ -18,17 +18,23 @@
     }
 </style>
 
-<h2>Clients <i class="fa-solid fa-users mr-3"></i></h2>
+<div class="row">
+    <div class="col-sm-4">
+        <h2>Clients <i class="fa-solid fa-users mr-3"></i></h2>
+    </div>
+    <div class="col-sm-8">
+        <br class="smallscreennotshow" />
+        @using (Html.BeginForm())
+        {
+            <p class="form-inline">
+                <input type="text" class="form-control" placeholder="Enter client name..." name="searchString" />&nbsp;
+                <button type="submit" class="btn btn-primary form-control"><i class="fa-solid fa-magnifying-glass mr-3"></i>Search Client</button>
+            </p>
+        }
+    </div>
+</div>
 
-@using (Html.BeginForm())
-{
-    <p class="form-inline">
-        <input type="text" class="form-control" placeholder="Enter client name..." name="searchString" />&nbsp;
-        <input type="submit" class="btn btn-primary" value="Find Client" />
-    </p>
-}
-<br />
-
+<p>All Riverside Holding's clients'</p>
 <table class="table table-striped">
     <thead class="table bg-dark text-light">
         <tr>

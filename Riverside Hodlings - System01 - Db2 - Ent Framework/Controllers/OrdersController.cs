@@ -55,5 +55,10 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
            
             return View(invoices);
         }
+
+        public ActionResult EditStatus(string Orderid)
+        {
+            return View();
+        }
     }
 }

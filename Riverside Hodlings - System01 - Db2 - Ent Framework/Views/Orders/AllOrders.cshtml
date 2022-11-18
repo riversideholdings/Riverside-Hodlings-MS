@@ -17,7 +17,7 @@
         {
             <p class="form-inline">
                 <input type="text" class="form-control" placeholder="Enter invoice number..." name="invoiceNumber" />&nbsp;
-                <button type="submit" class="btn btn-primary form-control"><i class="fa-solid fa-magnifying-glass mr-3"> Search 0rder</i></button>
+                <button type="submit" class="btn btn-primary form-control"><i class="fa-solid fa-magnifying-glass mr-3"></i>Search Order</button>
             </p>
         }
     </div>
@@ -57,6 +57,7 @@
                         <td><b>@inv.PAYMENT_STATUS</b></td>
 
                         <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
+      
                     </tr>
                 }
             </tbody>

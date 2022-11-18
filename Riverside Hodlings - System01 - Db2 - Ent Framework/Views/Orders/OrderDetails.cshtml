@@ -19,8 +19,8 @@
 
 <h2 class="arilfont"><i class="fa-regular fa-people-carry-box mr-3"></i> Order: @inv.INVOICE_NUM</h2>
 <div class="row">
-    <div col-sm-6>
-        <div class="card" style="width: 100%; height: 28rem;">
+    <div class="col-sm-6">
+        <div class="card" style="width: 100%; height: 34rem;">
             <div class="card-body">
                 <center><img src="~/icons/box.png" alt="box" width="18%"/></center>
                 <h4 class="crdheading">Order for</h4>
@@ -32,14 +32,22 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="card" style="width: 100%; height: 28rem;">
+        <div class="card" style="width: 100%; height: 34rem;">
             <div class="card-body">
                 <center><img src="~/icons/bill.png" alt="box" width="15%" /></center>
                 <h4 class="crdheading">Invoice details</h4>
                 <h5><i class="fa-regular fa-file-lines"></i> @inv.INVOICE_NUM</h5>
                 <h5><i class="fa-solid fa-calendar-days"></i> Date: @inv.INVOICE_DATE</h5>
-                <h5><i class="fa-solid fa-coins"></i> @inv.PAYMENT_STATUS</h5>
+                @if (inv.PAYMENT_STATUS == "Paid")
+                {
+                    <h5 style="color: yellowgreen"><i class="fa-solid fa-coins"></i> <b>@inv.PAYMENT_STATUS</b></h5>
+                }
+                else
+                {
+                    <h5 style="color: red"><i class="fa-solid fa-coins"></i> <b>@inv.PAYMENT_STATUS</b></h5>
+                }
                 <h5><i class="fa-regular fa-truck-fast"></i> Status: @inv.DELIVERY_STATUS</h5>
+                <button class="btn btn-info" onclick="@("window.location.href='" + @Url.Action("EditStatus", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-file-pen"></i></button> Edit Status
             </div>
         </div>
     </div>
