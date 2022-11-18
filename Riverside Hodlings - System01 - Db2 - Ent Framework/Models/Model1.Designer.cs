@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Business\Riverside holdings\Riverside Hodlings - System01 - Db2 - Ent Framework\Riverside Hodlings - System01 - Db2 - Ent Framework\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Web-Applications\Riverside Hodlings - System01 - Db2 - Ent Framework\Riverside Hodlings - System01 - Db2 - Ent Framework\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

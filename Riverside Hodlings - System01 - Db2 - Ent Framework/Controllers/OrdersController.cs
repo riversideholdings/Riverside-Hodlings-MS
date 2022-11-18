@@ -11,7 +11,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
     public class OrdersController : Controller
     {
         private Riverside_HoldingsEntities1 db = new Riverside_HoldingsEntities1();
-        public ActionResult AllOrders(string searchString, string sortOrder, string currentFilter, int? page)
+        public ActionResult AllOrders(string invoiceNumber, string sortOrder, string currentFilter, int? page)
         {
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -19,29 +19,28 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             ViewBag.CurrentSort = sortOrder;
 
             //
-            if (searchString != null)
+            if (invoiceNumber != null)
             {
                 page = 1;
             }
             else
             {
-                searchString = currentFilter;
+                invoiceNumber = currentFilter;
             }
 
-           
-
+        
             var invoices = new OrdersVm();
             invoices.Admins = db.ADMINISTRATORS.ToList();
             invoices.Clients = db.CLIENTS.ToList();
             invoices.Invoices = db.INVOICES.ToList().ToPagedList(pageNumber, pageSize);
 
             //return results according to search
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(invoiceNumber))
             {
-                invoices.Invoices = db.INVOICES.Where(i => i.INVOICE_NUM.Contains(searchString)).ToPagedList(pageNumber,pageSize);
+                invoices.Invoices = db.INVOICES.ToList().Where(i => i.INVOICE_NUM.Contains(invoiceNumber)).ToPagedList(pageNumber,pageSize);
             }
 
-            ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentFilter = invoiceNumber;
 
             return View(invoices);
         }

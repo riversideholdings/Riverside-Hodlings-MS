@@ -49,7 +49,7 @@
                 <td>@client.PHONE_NUMBER</td>
                 <td class="smallscreennotshow">@client.ADDRESS</td>
                 <td>
-                    @Html.ActionLink("Details", "ClientDetails", "ManageClients", new { id = client.CLIENT_ID }, new { @class = "btn btn-primary" })
+                    <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("ClientDetails", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-eye"></i></button>
                     @Html.ActionLink("Edit", "EditClient", "ManageClients", new { id = client.CLIENT_ID }, new { @class = "btn btn-info" })
                     @Html.ActionLink("Delete", "DeleteClient", "ManageClients", new { id = client.CLIENT_ID }, new { @class = "btn btn-danger" })
                 </td>

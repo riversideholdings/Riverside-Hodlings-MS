@@ -8,9 +8,18 @@
 }
 
 <h2>All Orders</h2>
+@using (Html.BeginForm())
+{
+    <p class="form-inline">
+        <input type="text" class="form-control" placeholder="Enter invoice number..." name="invoiceNumber" />&nbsp;
+        <input type="submit" class="btn btn-primary" value="Find Order" />
+    </p>
+}
+<br />
+
 <p>All Invoices on record</p>
-<section>
-    <table class="table table-striped">
+<div id="allorders-sect">
+    <table class="table table-striped" >
         <thead class="bg-dark text-light">
             <tr>
                 <th>#</th>
@@ -23,15 +32,14 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var inv in Model.Invoices)
             {
-                var num = inv.INVOICE_NUM.Substring(4,7);
-
+                var num = inv.INVOICE_NUM.Substring(4, 7);
                 <tr>
                     <td><b>@num</b></td>
                     <td>@inv.INVOICE_NUM</td>
                     <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
+
                     @foreach (var cli in Model.Clients)
                     {
                         if (inv.CLIENT_ID == cli.CLIENT_ID)
@@ -40,13 +48,54 @@
                         }
                     }
                     <td>R @inv.INVOICE_TOTAL</td>
-                    <td style="color: #3E85CE;"><b>@inv.PAYMENT_STATUS</b></td>
+
+                    <td><b>@inv.PAYMENT_STATUS</b></td>
+
                     <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
                 </tr>
             }
         </tbody>
     </table>
-</section>
+
+    @*@foreach (var invc in Model.Invoices)
+    {
+        var num = invc.INVOICE_NUM.Substring(4, 7);
+        <div class="card">
+            <div class="card-body" width="95%" height="50px">
+                <div class="row">
+                    <div class="col-sm-1">
+                        @num
+                    </div>
+                    <div class="col-sm-2">
+                        @invc.INVOICE_NUM
+                    </div>
+                    <div class="col-sm-2">
+                        @invc.INVOICE_DATE
+                    </div>
+                    <div class="col-sm-3">
+                        @foreach (var clin in Model.Clients)
+                        {
+                            if (invc.CLIENT_ID == clin.CLIENT_ID)
+                            {
+                                @clin.NAME
+                            }
+                        }
+                    </div>
+                    <div class="col-sm-2">
+                        @invc.INVOICE_TOTAL
+                    </div>
+                    <div class="col-sm-1">
+                       @invc.PAYMENT_STATUS
+                    </div>
+                    <div class="col-sm-1">
+                        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=invc.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+</div>
+<br />
 
 Page @(Model.Invoices.PageCount < Model.Invoices.PageNumber ? 0 : Model.Invoices.PageNumber) of @Model.Invoices.PageCount
 

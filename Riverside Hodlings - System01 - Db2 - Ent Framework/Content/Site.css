@@ -73,3 +73,22 @@ textarea {
 .tabDivDisplay:hover {
     transform: translate(0, -10px);
 }
+
+.greenclr{
+    color: yellowgreen;
+}
+
+.redclr{
+    color: red;
+}
+
+#allorders-sect {
+    height: 45vh;
+    overflow-y: scroll;
+    border-style: solid;
+    border-color: grey;
+    border-width: 0.2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0px 0px 2px 2px #888888;
+}

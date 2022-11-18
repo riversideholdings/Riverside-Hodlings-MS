@@ -10,5 +10,5 @@
 </p>
 
 @Html.ActionLink("Yes", "ConfirmDelete", "ManageClients", new { clientid=Model[0].CLIENT_ID }, new { @class = "btn btn-success" })
-@Html.ActionLink("Cancel", "Clients", "Home", new { @class = "btn btn-danger"})
+<a href="/Home/Clients" class="btn btn-danger">Cancel</a>
 

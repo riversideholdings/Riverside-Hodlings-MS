@@ -11,7 +11,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
     public class ManageClientsController : Controller
     {
         private Riverside_HoldingsEntities1 db = new Riverside_HoldingsEntities1();
-        public ActionResult ClientDetails()
+        public ActionResult ClientDetails(string clientId)
         {
 
             return View();

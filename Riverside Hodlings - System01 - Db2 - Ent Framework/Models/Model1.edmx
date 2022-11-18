@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Riverside_HoldingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Riverside_HoldingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMINISTRATORS">
           <Key>
             <PropertyRef Name="ADMIN_ID" />
@@ -71,7 +71,7 @@
             <PropertyRef Name="PRD_CODE" />
           </Key>
           <Property Name="PRD_CODE" Type="char" MaxLength="12" Nullable="false" />
-          <Property Name="PRODUCT" Type="char" MaxLength="50" />
+          <Property Name="PRODUCT_NAME" Type="char" MaxLength="50" />
           <Property Name="SELLING_PRICE" Type="decimal" Precision="10" Scale="2" />
           <Property Name="WATERPRENEUR_PRICE" Type="decimal" Precision="10" Scale="2" />
           <Property Name="WHOLESALE_PRICE" Type="decimal" Precision="10" Scale="2" />
@@ -137,8 +137,7 @@
             <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Riverside_HoldingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -213,7 +212,6 @@
             <PropertyRef Name="PRD_CODE" />
           </Key>
           <Property Name="PRD_CODE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="PRODUCT1" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
           <Property Name="SELLING_PRICE" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="WATERPRENEUR_PRICE" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="WHOLESALE_PRICE" Type="Decimal" Precision="10" Scale="2" />
@@ -222,6 +220,7 @@
           <Property Name="IMG_URL" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
           <Property Name="STOCK_LEVELS" Type="Int32" />
           <NavigationProperty Name="INVOICE_ITEM" Relationship="Self.PRD_CODE" FromRole="PRODUCTS" ToRole="INVOICE_ITEM" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK__CLIENT_PA__CLIEN__75A278F5">
           <End Role="CLIENTS" Type="Self.CLIENT" Multiplicity="1" />
@@ -356,8 +355,8 @@
           <EntitySetMapping Name="PRODUCTS">
             <EntityTypeMapping TypeName="Riverside_HoldingsModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
                 <ScalarProperty Name="PRD_CODE" ColumnName="PRD_CODE" />
-                <ScalarProperty Name="PRODUCT1" ColumnName="PRODUCT" />
                 <ScalarProperty Name="SELLING_PRICE" ColumnName="SELLING_PRICE" />
                 <ScalarProperty Name="WATERPRENEUR_PRICE" ColumnName="WATERPRENEUR_PRICE" />
                 <ScalarProperty Name="WHOLESALE_PRICE" ColumnName="WHOLESALE_PRICE" />

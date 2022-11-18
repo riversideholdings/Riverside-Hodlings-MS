@@ -21,7 +21,6 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
         }
     
         public string PRD_CODE { get; set; }
-        public string PRODUCT1 { get; set; }
         public Nullable<decimal> SELLING_PRICE { get; set; }
         public Nullable<decimal> WATERPRENEUR_PRICE { get; set; }
         public Nullable<decimal> WHOLESALE_PRICE { get; set; }
@@ -29,6 +28,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
         public string PALLET_SIZE { get; set; }
         public string IMG_URL { get; set; }
         public Nullable<int> STOCK_LEVELS { get; set; }
+        public string PRODUCT_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INVOICE_ITEM> INVOICE_ITEM { get; set; }
