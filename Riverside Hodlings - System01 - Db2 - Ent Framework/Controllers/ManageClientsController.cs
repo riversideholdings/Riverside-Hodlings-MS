@@ -26,9 +26,9 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 
             return View();
         }
-        public ActionResult DeleteClient(string id)
+        public ActionResult DeleteClient(string clientId)
         {
-            var client = db.CLIENTS.ToList().Where(c => c.CLIENT_ID == id);
+            var client = db.CLIENTS.ToList().Where(c => c.CLIENT_ID == clientId);
             return View(client.ToList());
         }
 

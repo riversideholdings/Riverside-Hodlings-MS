@@ -18,7 +18,7 @@
     }
 </style>
 
-<h2>Riverside Holdings Clients</h2>
+<h2>Clients <i class="fa-solid fa-users mr-3"></i></h2>
 
 @using (Html.BeginForm())
 {
@@ -37,6 +37,8 @@
             <th>Phone Number</th>
             <th class="smallscreennotshow">Physical address</th>
             <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -50,8 +52,12 @@
                 <td class="smallscreennotshow">@client.ADDRESS</td>
                 <td>
                     <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("ClientDetails", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-eye"></i></button>
-                    @Html.ActionLink("Edit", "EditClient", "ManageClients", new { id = client.CLIENT_ID }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Delete", "DeleteClient", "ManageClients", new { id = client.CLIENT_ID }, new { @class = "btn btn-danger" })
+                </td>
+                <td>
+                    <button class="btn btn-info" onclick="@("window.location.href='" + @Url.Action("EditClient", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-user-pen"></i></button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("DeleteClient", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-trash-can"></i></button>
                 </td>
             </tr>
         }
