@@ -10798,7 +10798,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 #sidebar {
-    padding-top: 45px;
+    padding-top: 75px;
     min-width: 250px;
     max-width: 250px;
     background: #212121;
@@ -10938,7 +10938,8 @@ a[data-toggle=collapse] {
 
 @media(max-width:991.98px) {
     #sidebarCollapse span {
-        display: none
+        display: none;
+        font-size: 25px;
     }
 }
 

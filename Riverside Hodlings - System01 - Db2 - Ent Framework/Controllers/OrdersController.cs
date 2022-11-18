@@ -13,7 +13,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
         private Riverside_HoldingsEntities1 db = new Riverside_HoldingsEntities1();
         public ActionResult AllOrders(string invoiceNumber, string sortOrder, string currentFilter, int? page)
         {
-            int pageSize = 10;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
 
             ViewBag.CurrentSort = sortOrder;
@@ -47,10 +47,12 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 
         public ActionResult OrderDetails(string Orderid)
         {
-            var invoices = new DashboardVM();
-            invoices.Admins = db.ADMINISTRATORS.ToList();
+            var invoices = new ClientsVm();
+            invoices.ClInvoiceNotes = db.INVOICE_NOTES.Where(n => n.INVOICE_NUM == Orderid).ToList();
             invoices.Clients = db.CLIENTS.ToList();
+            invoices.ClientPayments = db.CLIENT_PAYMENTS.ToList();
             invoices.Invoices = db.INVOICES.Where(o => o.INVOICE_NUM == Orderid).ToList();
+           
             return View(invoices);
         }
     }

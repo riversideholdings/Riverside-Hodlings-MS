@@ -221,6 +221,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="icon.ico" />
+    <Content Include="icons\bill.png" />
+    <Content Include="icons\box.png" />
+    <Content Include="icons\delivery-box.jpg" />
+    <Content Include="logo-transparent.png" />
+    <Content Include="logo.png" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -238,6 +243,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Riverside_OG.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="customscript\main.js" />
