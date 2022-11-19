@@ -55,8 +55,7 @@
             <div class="row">
                 <div class="col-sm-1 newRoman">
                     <center>
-                        <button class="nav-iconsRH navimenubtn" onclick="shownewInvNum()" data-toggle="modal"
-                                data-target="#newOrderFormCenter">
+                        <button class="nav-iconsRH navimenubtn" onclick="@("window.location.href='" + @Url.Action("AddOrder", "Orders") + "'")">
                             <i class="fa-solid fa-file-circle-plus"></i>
                         </button>
                         <p>Add order</p>
@@ -65,7 +64,7 @@
 
                 <div class="col-sm-1 newRoman">
                     <center>
-                        <button class="nav-iconsRH navimenubtn" onclick="@("window.location.href='" + @Url.Action("Clients", "Home") + "'")">
+                        <button class="nav-iconsRH navimenubtn" onclick="@("window.location.href='" + @Url.Action("AddClient", "ManageClients") + "'")">
                             <i class="fa fa-user-plus"></i>
                         </button>
                         <p>Add Client</p>
