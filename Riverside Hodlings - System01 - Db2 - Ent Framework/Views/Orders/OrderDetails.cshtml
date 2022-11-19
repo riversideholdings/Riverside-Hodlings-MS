@@ -1,4 +1,4 @@
-﻿@model Riverside_Hodlings___System01___Db2___Ent_Framework.Models.ClientsVm
+﻿@model Riverside_Hodlings___System01___Db2___Ent_Framework.Models.orderDetailsVm
 @{
     ViewBag.Title = "OrderDetails";
 }
@@ -19,7 +19,7 @@
     else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
     {
         colorclass = "orangepclr";
-        indicator = "pending";
+        indicator = "Pending";
         bgcolorclss = "orange-bg";
     }
     else
@@ -42,34 +42,35 @@
 </style>
 
 <a class="btn btn-dark" href="/Orders/AllOrders"><i class="fa-solid fa-chevron-left"></i></a>
-<h2 class="arilfont"><i class="fa-regular fa-people-carry-box mr-3"></i> Order: @inv.INVOICE_NUM</h2>
-<span class="indcatorbar @bgcolorclss">@indicator</span> 
+<br />
 
-
+<span class="arilfont" style="font-size: 28px; padding-top:10px;"><i class="fa-regular fa-people-carry-box mr-3"></i> Order: @inv.INVOICE_NUM </span><span class="indcatorbar @bgcolorclss">@indicator</span>
+ 
+<br />
 <h4>Details:</h4>
 <div class="row">
     <div class="col-sm-4">
-        <div class="card" style="width: 100%; height: 33rem;">
+        <div class="card" style="width: 100%; height: 28rem;">
             <div class="card-body">
                 <center><img src="~/icons/box.png" alt="box" width="18%" /></center>
                 <h4 class="crdheading">Order for</h4>
-                <h5><i class="fa-solid fa-user"></i> @client[0].NAME</h5>
-                <h5><i class="fa-solid fa-map-location-dot"></i> Address: @client[0].ADDRESS</h5>
-                <h5><i class="fa-solid fa-phone"></i> Phone number: @client[0].PHONE_NUMBER</h5>
-                <h5><i class="fa-solid fa-envelope"></i> Email: @client[0].EMAIL</h5>
+                <h5><i class="fa-solid fa-user mr-3"></i> @client[0].NAME</h5>
+                <h5><i class="fa-solid fa-map-location-dot mr-3"></i> Address: @client[0].ADDRESS</h5>
+                <h5><i class="fa-solid fa-phone mr-3"></i> Phone number: @client[0].PHONE_NUMBER</h5>
+                <h5><i class="fa-solid fa-envelope mr-3"></i> Email: @client[0].EMAIL</h5>
             </div>
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="card" style="width: 100%; height: 33rem;">
+        <div class="card" style="width: 100%; height: 28rem;">
             <div class="card-body">
                 <center><img src="~/icons/bill.png" alt="box" width="15%" /></center>
                 <h4 class="crdheading">Invoice details</h4>
-                <h5><i class="fa-regular fa-file-lines"></i> @inv.INVOICE_NUM</h5>
-                <h5><i class="fa-solid fa-calendar-days"></i> Date: @inv.INVOICE_DATE</h5>
-                <h5 class="@colorclass"><i class="fa-solid fa-coins"></i> <b>@inv.PAYMENT_STATUS</b></h5>
-                <h5><i class="fa-regular fa-truck-fast"></i> Status: @inv.DELIVERY_STATUS</h5>
-                @if (inv.PAYMENT_STATUS == "Void                ")
+                <h5><i class="fa-regular fa-file-lines mr-3"></i> @inv.INVOICE_NUM</h5>
+                <h5><i class="fa-solid fa-calendar-days mr-3"></i> Date: @inv.INVOICE_DATE</h5>
+                <h5 class="@colorclass"><i class="fa-solid fa-coins mr-3"></i> <b>@inv.PAYMENT_STATUS</b></h5>
+                <h5><i class="fa-regular fa-truck-fast mr-3"></i> Status: @inv.DELIVERY_STATUS</h5>
+                @if (inv.PAYMENT_STATUS == "Void                " || inv.PAYMENT_STATUS == "Paid                ")
                 {
                     //dont show the edit status button
                 }
@@ -84,12 +85,21 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="card" style="width: 100%; height: 33rem;">
+        <div class="card" style="width: 100%; height: 28rem;">
             <div class="card-body">
                 <center><img src="~/icons/shopping-cart.png" alt="box" width="15%" /></center>
                 <h4 class="crdheading">Invoice Items</h4>
-                <h5></h5>
-                <h5></h5>
+                @foreach (var invItem in Model.Invoice_itm)
+                {
+                    foreach (var prod in Model.Products)
+                    {
+                        if (invItem.PRD_CODE == prod.PRD_CODE)
+                        {
+                            <h5><i class="fa-solid fa-cart-circle-check mr-3"></i> @prod.PRODUCT_NAME &nbsp;X @invItem.QUANTITY</h5>
+                        }
+                    }
+
+                }
             </div>
         </div>
     </div>

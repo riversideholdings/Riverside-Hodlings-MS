@@ -155,6 +155,7 @@
     <Compile Include="Models\ADMINISTRATOR.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\orderDetailsVm.cs" />
     <Compile Include="Models\CLIENT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

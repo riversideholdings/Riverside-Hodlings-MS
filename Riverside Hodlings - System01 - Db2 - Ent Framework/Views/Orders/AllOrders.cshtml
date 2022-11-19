@@ -43,7 +43,7 @@
 
                 <tr>
                     <td><b>@num</b></td>
-                    <td>@inv.INVOICE_NUM</td>
+                    <td style="color: #3E85CE; font-weight: bold;">@inv.INVOICE_NUM</td>
                     <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
 
                     @foreach (var cli in Model.Clients)
@@ -57,15 +57,15 @@
 
                     @if (inv.PAYMENT_STATUS == "Paid                ")
                     {
-                        <td class="greenclr icnImg" @*width="10%"*@><span><img src="~/icons/checked.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                        <td class="greenclr" @*width="10%"*@><span><img src="~/icons/checked.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
                     }
                     else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
                     {
-                        <td class="orangepclr icnImg" @*width="10%"*@><span><img src="~/icons/pending.png" class="icnImg"/></span> <b>@inv.PAYMENT_STATUS</b></td>
+                        <td class="orangepclr" @*width="10%"*@><span><img src="~/icons/pending.png" class="icnImg"/></span> <b>@inv.PAYMENT_STATUS</b></td>
                     }
                     else
                     {
-                        <td class="redclr icnImg" @*width="10%"*@><span><img src="~/icons/cancel.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                        <td class="redclr" @*width="10%"*@><span><img src="~/icons/cancel.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
                     }
 
                     <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>

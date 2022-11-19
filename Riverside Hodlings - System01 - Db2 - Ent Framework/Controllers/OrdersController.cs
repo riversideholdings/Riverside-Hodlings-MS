@@ -47,12 +47,13 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 
         public ActionResult OrderDetails(string Orderid)
         {
-            var invoices = new ClientsVm();
+            var invoices = new orderDetailsVm();
             invoices.ClInvoiceNotes = db.INVOICE_NOTES.Where(n => n.INVOICE_NUM == Orderid).ToList();
             invoices.Clients = db.CLIENTS.ToList();
+            invoices.Products = db.PRODUCTS.ToList();
             invoices.ClientPayments = db.CLIENT_PAYMENTS.ToList();
             invoices.Invoices = db.INVOICES.Where(o => o.INVOICE_NUM == Orderid).ToList();
-           
+            invoices.Invoice_itm = db.INVOICE_ITEM.Where(itm => itm.INVOICE_NUM == Orderid).ToList();
             return View(invoices);
         }
 
