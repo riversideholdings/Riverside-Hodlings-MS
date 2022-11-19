@@ -39,26 +39,38 @@
             <tbody>
                 @foreach (var inv in Model.Invoices)
                 {
-                    var num = inv.INVOICE_NUM.Substring(4, 7);
-                    <tr>
-                        <td><b>@num</b></td>
-                        <td>@inv.INVOICE_NUM</td>
-                        <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
+                    var num = inv.INVOICE_NUM.Substring(4, 7);                  
 
-                        @foreach (var cli in Model.Clients)
+                <tr>
+                    <td><b>@num</b></td>
+                    <td>@inv.INVOICE_NUM</td>
+                    <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
+
+                    @foreach (var cli in Model.Clients)
+                    {
+                        if (inv.CLIENT_ID == cli.CLIENT_ID)
                         {
-                            if (inv.CLIENT_ID == cli.CLIENT_ID)
-                            {
-                                <td class="smallscreennotshow">@cli.NAME</td>
-                            }
+                            <td class="smallscreennotshow">@cli.NAME</td>
                         }
-                        <td>R @inv.INVOICE_TOTAL</td>
+                    }
+                    <td>R @inv.INVOICE_TOTAL</td>
 
-                        <td><b>@inv.PAYMENT_STATUS</b></td>
+                    @if (inv.PAYMENT_STATUS == "Paid                ")
+                    {
+                        <td class="greenclr" width="10%"><span><img src="~/icons/checked.png" width="12%" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                    }
+                    else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
+                    {
+                        <td class="orangepclr" width="10%"><span><img src="~/icons/pending.png" width="12%" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                    }
+                    else
+                    {
+                        <td class="redclr" width="10%"><span><img src="~/icons/cancel.png" width="12%" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                    }
 
-                        <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
-      
-                    </tr>
+                    <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
+
+                </tr>
                 }
             </tbody>
         </table>

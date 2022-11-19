@@ -122,6 +122,17 @@ textarea {
     width: 4.5%;
 }
 
+.greenclr {
+    color: yellowgreen;
+}
+
+.redclr {
+    color: red;
+}
+.orangepclr {
+    color:#F89618;
+}
+
 @media only screen and (max-width: 600px) {
     .smallscreennotshow {
         display: none

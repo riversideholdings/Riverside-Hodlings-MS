@@ -221,9 +221,14 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="icon.ico" />
+    <Content Include="icons\back.png" />
     <Content Include="icons\bill.png" />
     <Content Include="icons\box.png" />
-    <Content Include="icons\delivery-box.jpg" />
+    <Content Include="icons\cancel.png" />
+    <Content Include="icons\checked.png" />
+    <Content Include="icons\pending.png" />
+    <Content Include="icons\push-cart.png" />
+    <Content Include="icons\shopping-cart.png" />
     <Content Include="logo-transparent.png" />
     <Content Include="logo.png" />
     <Content Include="Models\Model1.Context.tt">
