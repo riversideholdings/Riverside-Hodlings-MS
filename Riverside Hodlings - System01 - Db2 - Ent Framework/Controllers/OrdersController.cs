@@ -32,7 +32,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             var invoices = new OrdersVm();
             invoices.Admins = db.ADMINISTRATORS.ToList();
             invoices.Clients = db.CLIENTS.ToList();
-            invoices.Invoices = db.INVOICES.ToList().ToPagedList(pageNumber, pageSize);
+            invoices.Invoices = db.INVOICES.ToList().OrderByDescending(i => i.INVOICE_NUM).ToPagedList(pageNumber, pageSize);
 
             //return results according to search
             if (!String.IsNullOrEmpty(invoiceNumber))

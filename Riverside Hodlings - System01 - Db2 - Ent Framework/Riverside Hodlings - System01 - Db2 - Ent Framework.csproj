@@ -227,6 +227,7 @@
     <Content Include="icons\box.png" />
     <Content Include="icons\cancel.png" />
     <Content Include="icons\checked.png" />
+    <Content Include="icons\discount.png" />
     <Content Include="icons\pending.png" />
     <Content Include="icons\push-cart.png" />
     <Content Include="icons\shopping-cart.png" />

@@ -49,6 +49,10 @@ textarea {
     }
 }
 
+.row {
+    row-gap: 10px
+}
+
 .nav-iconsRH {
     width: 65px;
     height: 65px;
