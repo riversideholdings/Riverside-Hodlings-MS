@@ -348,7 +348,7 @@
     <Content Include="Views\ManageClients\DeleteClient.cshtml" />
     <Content Include="Views\ManageClients\ClientDetails.cshtml" />
     <Content Include="Views\Orders\OrderDetails.cshtml" />
-    <Content Include="Views\Orders\EditStatus.cshtml" />
+    <Content Include="Views\Orders\AddOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

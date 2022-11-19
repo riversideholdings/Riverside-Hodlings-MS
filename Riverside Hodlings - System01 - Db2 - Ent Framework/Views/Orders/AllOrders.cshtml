@@ -11,7 +11,7 @@
     <div class="col-sm-4">
         <h2>All Orders <i class="fa-solid fa-dolly"></i></h2>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">
         <br class="smallscreennotshow"/>
         @using (Html.BeginForm())
         {
@@ -21,8 +21,12 @@
             </p>
         }
     </div>
+    <div class="col-sm-3">
+        <br class="smallscreennotshow" />
+        <a href="/Orders/AddOrder" class="btn btn-secondary float-right"><i class="fa-solid fa-cart-plus mr-3"></i> Add order</a>
+    </div>
 </div>
-<p>All Invoices on record</p>
+<p>Invoices on record</p>
     <div id="allorders-sect">
         <table class="table table-striped">
             <thead class="bg-dark text-light">
