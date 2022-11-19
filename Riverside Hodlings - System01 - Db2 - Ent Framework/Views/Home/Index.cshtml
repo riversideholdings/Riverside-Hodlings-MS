@@ -83,7 +83,7 @@
 
                 <div class="col-sm-1 newRoman">
                     <center>
-                        <button class="nav-iconsRH navimenubtn" onclick="window.open('allorders.html', '_self')">
+                        <button class="nav-iconsRH navimenubtn" onclick="@("window.location.href='" + @Url.Action("AllOrders", "Orders") + "'")">
                             <i class="fa-solid fa-dolly"></i>
                         </button>
                         <p>View all Orders</p>
@@ -101,7 +101,7 @@
 
                 <div class="col-sm-1 newRoman">
                     <center>
-                        <button class="nav-iconsRH navimenubtn" onclick="window.open('clients.html', '_self')">
+                        <button class="nav-iconsRH navimenubtn" onclick="@("window.location.href='" + @Url.Action("Clients", "Home") + "'")">
                             <i class="fa-solid fa-users"></i>
                         </button>
                         <p>View Clients</p>
@@ -110,7 +110,7 @@
 
                 <div class="col-sm-1 newRoman">
                     <center>
-                        <button class="nav-iconsRH navimenubtn" onclick="window.open('finance.html', '_self')">
+                        <button class="nav-iconsRH navimenubtn" onclick="@("window.location.href='" + @Url.Action("Finance", "Home") + "'")">
                             <i class="fa-solid fa-money-bill-trend-up"></i>
                         </button>
                         <p>View Finance</p>

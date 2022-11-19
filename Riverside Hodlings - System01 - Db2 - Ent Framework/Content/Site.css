@@ -142,3 +142,35 @@ textarea {
         width: 10%;
     }
 }
+
+/* Icon images */
+.icnImg {
+    width:15%;
+}
+
+@media only screen (max-width: 600px){
+    .icnImg {
+        width: 20%;
+    }
+}
+
+indcatorbar {
+    border-style: solid;
+    border-width: 0.2px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 2px #888888;
+    width: inherit;
+    padding: 5px;
+}
+
+.red-bg{
+    background-color: lightcoral;
+}
+
+.orange-bg{
+    background-color: orange;
+}
+
+.yellowgreen-bg{
+    background-color: lightgreen;
+}

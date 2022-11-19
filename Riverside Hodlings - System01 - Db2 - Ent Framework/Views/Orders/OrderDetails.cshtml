@@ -7,13 +7,26 @@
     var inv = Model.Invoices[0];
     var client = Model.Clients.Where(c => c.CLIENT_ID == inv.CLIENT_ID).ToList();
     var colorclass = "";
+    var indicator = "";
+    var bgcolorclss = "";
+
     if (inv.PAYMENT_STATUS == "Paid                ")
     {
         colorclass = "greenclr";
+        indicator = "Completed";
+        bgcolorclss = "yellowgreen-bg";
+    }
+    else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
+    {
+        colorclass = "orangepclr";
+        indicator = "pending";
+        bgcolorclss = "orange-bg";
     }
     else
     {
         colorclass = "redclr";
+        indicator = "Voided";
+        bgcolorclss = "red-bg";
     }
 }
 
@@ -28,7 +41,11 @@
     
 </style>
 
-<h2 class="arilfont"><i class="fa-regular fa-people-carry-box mr-3"></i> Order: @inv.INVOICE_NUM</h2><button class="btn float-right"><img src="~/icons/back.png" width="100%"/></button>
+<a class="btn btn-dark" href="/Orders/AllOrders"><i class="fa-solid fa-chevron-left"></i></a>
+<h2 class="arilfont"><i class="fa-regular fa-people-carry-box mr-3"></i> Order: @inv.INVOICE_NUM</h2>
+<span class="indcatorbar @bgcolorclss">@indicator</span> 
+
+
 <h4>Details:</h4>
 <div class="row">
     <div class="col-sm-4">
@@ -71,8 +88,8 @@
             <div class="card-body">
                 <center><img src="~/icons/shopping-cart.png" alt="box" width="15%" /></center>
                 <h4 class="crdheading">Invoice Items</h4>
-                <h5><i class="fa-regular fa-file-lines"></i></h5>
-                <h5><i class="fa-solid fa-calendar-days"></i></h5>
+                <h5></h5>
+                <h5></h5>
             </div>
         </div>
     </div>
