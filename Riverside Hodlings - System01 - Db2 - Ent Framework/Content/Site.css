@@ -154,7 +154,7 @@ textarea {
     }
 }
 
-indcatorbar {
+.indcatorbar {
     border-style: solid;
     border-width: 0.2px;
     border-radius: 10px;
