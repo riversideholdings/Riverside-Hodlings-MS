@@ -42,7 +42,7 @@
 </style>
 
 <a class="btn btn-dark float-right" style="position:fixed; right:15px;" href="/Orders/AllOrders"><i class="fa-solid fa-chevron-left"></i></a>
-<br />
+<br /><br />
 
 <span class="arilfont" style="font-size: 28px; padding-top:10px;"><i class="fa-regular fa-people-carry-box mr-3"></i> Order: @inv.INVOICE_NUM </span><span class="indcatorbar @bgcolorclss">@indicator</span>
  
@@ -124,10 +124,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-2">
-                        <h4 class="crdheading">Invoice Notes</h4>
                         <img src="~/icons/discount.png" alt="box" width="20%" />
                     </div>
                     <div class="col-sm-10">
+                        <h4 class="crdheading">Invoice Notes</h4>
                         <p>@Model.ClInvoiceNotes[0].DESCRIPTION</p>
                     </div>
                 </div>

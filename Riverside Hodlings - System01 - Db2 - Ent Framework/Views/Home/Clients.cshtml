@@ -22,7 +22,7 @@
     <div class="col-sm-4">
         <h2>Clients <i class="fa-solid fa-users mr-3"></i></h2>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-5">
         <br class="smallscreennotshow" />
         @using (Html.BeginForm())
         {
@@ -31,6 +31,10 @@
                 <button type="submit" class="btn btn-primary form-control"><i class="fa-solid fa-magnifying-glass mr-3"></i>Search Client</button>
             </p>
         }
+    </div>
+    <div class="col-sm-3">
+        <br class="smallscreennotshow" />
+        <a href="/ManageClients/AddClient" class="btn btn-secondary float-right"><i class="fa-solid fa-user-plus mr-3"></i> Add Client</a>
     </div>
 </div>
 
