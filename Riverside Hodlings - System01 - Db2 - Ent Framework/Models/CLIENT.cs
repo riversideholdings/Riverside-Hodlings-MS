@@ -27,6 +27,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
         public string EMAIL { get; set; }
         public string ADDRESS { get; set; }
         public string CONTACT_PERSON { get; set; }
+        public Nullable<System.DateTime> DATE_ADDED { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENT_PAYMENTS> CLIENT_PAYMENTS { get; set; }

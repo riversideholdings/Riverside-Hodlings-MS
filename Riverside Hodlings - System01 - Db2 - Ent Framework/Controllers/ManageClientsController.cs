@@ -18,8 +18,10 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
         }
         public ActionResult AddClient()
         {
-            
-            return View();
+            var client = new ClientsVm();
+            client.Clients = db.CLIENTS.OrderByDescending(C => C.DATE_ADDED).ToList();
+            client.Invoices = db.INVOICES.ToList();
+            return View(client);
         }
         public ActionResult EditClient()
         {

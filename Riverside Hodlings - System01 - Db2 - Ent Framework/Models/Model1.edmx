@@ -36,6 +36,7 @@
           <Property Name="EMAIL" Type="char" MaxLength="30" />
           <Property Name="ADDRESS" Type="varchar" MaxLength="50" />
           <Property Name="CONTACT_PERSON" Type="char" MaxLength="50" />
+          <Property Name="DATE_ADDED" Type="date" />
         </EntityType>
         <EntityType Name="INVOICE_ITEM">
           <Key>
@@ -207,6 +208,7 @@
           <Property Name="CONTACT_PERSON" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="CLIENT_PAYMENTS" Relationship="Self.FK__CLIENT_PA__CLIEN__75A278F5" FromRole="CLIENTS" ToRole="CLIENT_PAYMENTS" />
           <NavigationProperty Name="INVOICES" Relationship="Riverside_HoldingsModel.FK__INVOICES__CLIENT__7C4F7684" FromRole="CLIENT" ToRole="INVOICE" />
+          <Property Name="DATE_ADDED" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="INVOICE_ITEM">
           <Key>
@@ -361,6 +363,7 @@
           <EntitySetMapping Name="CLIENTS">
             <EntityTypeMapping TypeName="Riverside_HoldingsModel.CLIENT">
               <MappingFragment StoreEntitySet="CLIENTS">
+                <ScalarProperty Name="DATE_ADDED" ColumnName="DATE_ADDED" />
                 <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />

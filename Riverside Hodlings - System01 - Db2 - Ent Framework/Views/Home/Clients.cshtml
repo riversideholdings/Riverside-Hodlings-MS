@@ -1,11 +1,10 @@
 ﻿@model PagedList.IPagedList<Riverside_Hodlings___System01___Db2___Ent_Framework.Models.CLIENT>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-@*<--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 @{
     ViewBag.Title = "Clients";
@@ -68,7 +67,7 @@
                 </td>
                 <td>
                     <button class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("DeleteClient", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-trash-can"></i></button>
-                    <button class="btn btn-danger" id="@client.CLIENT_ID" onclick="deleteClient(this.id)">Delete</button>
+                    @*<button class="btn btn-danger" id="@client.CLIENT_ID" onclick="deleteClient(this.id)">Delete</button>*@
                 </td>
             </tr>
         }
@@ -80,7 +79,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 @Html.PagedListPager(Model, page => Url.Action("Clients", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 <!-- Modal -->
-<div class="modal fade" id="ClientModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!--<div class="modal fade" id="ClientModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +100,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
         $.ajax({
             url: '/ManageClients/DeleteClient/',
             type: 'GET',
-            data: { id: prodId },
+            data: { clientId: prodId },
             success: function (response) {
                 $('#clientModalbody').html(response);
                 $('#ClientsModalCenter').modal('show');
@@ -111,4 +110,4 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             }
         });
     }
-</script>
+</script>-->
