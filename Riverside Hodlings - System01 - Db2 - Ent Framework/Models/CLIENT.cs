@@ -18,6 +18,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
         public CLIENT()
         {
             this.CLIENT_PAYMENTS = new HashSet<CLIENT_PAYMENTS>();
+            this.INVOICES = new HashSet<INVOICE>();
         }
     
         public string CLIENT_ID { get; set; }
@@ -29,5 +30,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CLIENT_PAYMENTS> CLIENT_PAYMENTS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<INVOICE> INVOICES { get; set; }
     }
 }

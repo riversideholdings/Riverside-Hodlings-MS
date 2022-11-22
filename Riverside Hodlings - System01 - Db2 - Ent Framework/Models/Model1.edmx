@@ -92,6 +92,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__INVOICE_I__INVOI__7D439ABD">
+          <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="0..1" />
+          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVOICES">
+              <PropertyRef Name="INVOICE_NUM" />
+            </Principal>
+            <Dependent Role="INVOICE_ITEM">
+              <PropertyRef Name="INVOICE_NUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVOICES__CLIENT__7C4F7684">
+          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
+          <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="INVOICES">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="INVOICE_NUM">
           <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="0..1" />
           <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
@@ -127,6 +151,14 @@
           <AssociationSet Name="FK__CLIENT_PA__CLIEN__75A278F5" Association="Self.FK__CLIENT_PA__CLIEN__75A278F5">
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="CLIENT_PAYMENTS" EntitySet="CLIENT_PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVOICE_I__INVOI__7D439ABD" Association="Self.FK__INVOICE_I__INVOI__7D439ABD">
+            <End Role="INVOICES" EntitySet="INVOICES" />
+            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVOICES__CLIENT__7C4F7684" Association="Self.FK__INVOICES__CLIENT__7C4F7684">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="INVOICES" EntitySet="INVOICES" />
           </AssociationSet>
           <AssociationSet Name="INVOICE_NUM" Association="Self.INVOICE_NUM">
             <End Role="INVOICES" EntitySet="INVOICES" />
@@ -174,6 +206,7 @@
           <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CONTACT_PERSON" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="CLIENT_PAYMENTS" Relationship="Self.FK__CLIENT_PA__CLIEN__75A278F5" FromRole="CLIENTS" ToRole="CLIENT_PAYMENTS" />
+          <NavigationProperty Name="INVOICES" Relationship="Riverside_HoldingsModel.FK__INVOICES__CLIENT__7C4F7684" FromRole="CLIENT" ToRole="INVOICE" />
         </EntityType>
         <EntityType Name="INVOICE_ITEM">
           <Key>
@@ -206,6 +239,7 @@
           <Property Name="PAYMENT_STATUS" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <Property Name="DELIVERY_STATUS" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="INVOICE_ITEM" Relationship="Self.INVOICE_NUM" FromRole="INVOICES" ToRole="INVOICE_ITEM" />
+          <NavigationProperty Name="CLIENT" Relationship="Riverside_HoldingsModel.FK__INVOICES__CLIENT__7C4F7684" FromRole="INVOICE" ToRole="CLIENT" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -278,7 +312,23 @@
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
             <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
           </AssociationSet>
+          <AssociationSet Name="FK__INVOICES__CLIENT__7C4F7684" Association="Riverside_HoldingsModel.FK__INVOICES__CLIENT__7C4F7684">
+            <End Role="CLIENT" EntitySet="CLIENTS" />
+            <End Role="INVOICE" EntitySet="INVOICES" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__INVOICES__CLIENT__7C4F7684">
+          <End Type="Riverside_HoldingsModel.CLIENT" Role="CLIENT" Multiplicity="0..1" />
+          <End Type="Riverside_HoldingsModel.INVOICE" Role="INVOICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="INVOICE">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

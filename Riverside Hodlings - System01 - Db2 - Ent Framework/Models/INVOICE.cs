@@ -30,5 +30,6 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INVOICE_ITEM> INVOICE_ITEM { get; set; }
+        public virtual CLIENT CLIENT { get; set; }
     }
 }

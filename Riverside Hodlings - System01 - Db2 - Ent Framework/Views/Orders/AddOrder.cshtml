@@ -1,6 +1,88 @@
-﻿
+﻿@model Riverside_Hodlings___System01___Db2___Ent_Framework.Models.orderDetailsVm
 @{
     ViewBag.Title = "AddOrder";
+
+    var lasinvid = Model.Invoices[0].INVOICE_NUM;
+    var x = Convert.ToInt32(lasinvid.Replace("RH", ""));
+    var y = x + 1;
+    var newinvoice = "RH" + y;
+    var prod = Model.Products;
 }
 
 <h2><i class="fa-solid fa-dolly mr-3"></i> Add a new Order</h2>
+
+<hr />
+
+<div class="row">
+        <div class="col-sm-4">
+            <h3>Invoice details</h3>
+            <div class="form-group">
+                <label for="lastinvoiceNum">Last invoice in database</label>
+                <input type="text" class="form-control" id="lastinvoiceNum" disabled value="@lasinvid" />
+            </div>
+
+            <div class="form-group">
+                <label for="newinvoiceNum">New invoice number</label>
+                <input type="text" class="form-control" id="newinvoiceNum" name="InvoiceNum" disabled value="@newinvoice" />
+            </div>
+
+            <div class="form-group">
+                <label for="newinvoiceNum">Date</label>
+                <input type="date" class="form-control" id="dateField" name="date" />
+            </div>
+
+           
+        </div>
+        <div class="col-sm-4">
+            <h3>Invoice items details</h3>
+
+            <div class="form-group">
+                <label for="invPriceClass">Prices Used</label>
+                <select class="form-control form-control-lg" id="invRecip" name="recipient">
+                    <option value="Select a recipient">Select a price class</option>
+                    <option value="Selling Price">Selling Price</option>
+                    <option value="Wholesale Price">Wholesale Price</option>
+                    <option value="Waterpreneur Price  ">Waterpreneur Price</option>
+                    <option value="Registration">Registration</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <h3>Recipient details</h3>
+
+            <div class="form-group">
+                <label for="invRecip">Recipient</label>
+                <select class="form-control form-control-lg" id="invRecip" name="recipient">
+                    <option value="Select a recipient">Select a recipient</option>
+                    @foreach (var client in Model.Clients)
+                    {
+                        <option value="@client.NAME">@client.NAME</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="invaddress">Address</label>
+                <input type="text" class="form-control" id="addressField" name="address" />
+            </div>
+
+            <div class="form-group">
+                <label for="regNum">Registration number</label>
+                <input type="text" class="form-control" id="regNum" name="regnumber" />
+            </div>
+
+            <div class="form-group">
+                <label for="vatNum">VAT number</label>
+                <input type="text" class="form-control" id="vatNum" name="vatnumber" />
+            </div>
+
+            <div class="form-group">
+                <label for="discountNote">Discount Note:</label>
+                <textarea type="text" class="form-text form-control" rows="3" placeholder="Enter notes..." id="discountNote" name="note"></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary"><i class="fa-solid fa-file-lines mr-3"></i> Add Order</button>
+            <button type="button" class="btn btn-danger"><i class="fa-solid fa-xmark mr-3"></i> Cancel</button>
+        </div>
+</div>

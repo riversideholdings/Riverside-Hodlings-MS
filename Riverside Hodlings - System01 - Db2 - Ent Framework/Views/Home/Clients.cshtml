@@ -68,6 +68,7 @@
                 </td>
                 <td>
                     <button class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("DeleteClient", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-trash-can"></i></button>
+                    <button class="btn btn-danger" id="@client.CLIENT_ID" onclick="deleteClient(this.id)">Delete</button>
                 </td>
             </tr>
         }
@@ -79,7 +80,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 @Html.PagedListPager(Model, page => Url.Action("Clients", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 <!-- Modal -->
-<!--<div class="modal fade" id="ClientModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="ClientModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -110,4 +111,4 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             }
         });
     }
-</script>-->
+</script>

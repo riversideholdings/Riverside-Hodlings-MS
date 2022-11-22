@@ -5,6 +5,7 @@
 
 @{
     ViewBag.Title = "AllOrders";
+    var invc = Model.Invoices.Take(1).ToList();
 }
 
 <div class="row">
@@ -23,9 +24,12 @@
     </div>
     <div class="col-sm-3">
         <br class="smallscreennotshow" />
-        <a href="/Orders/AddOrder" class="btn btn-secondary float-right"><i class="fa-solid fa-cart-plus mr-3"></i> Add order</a>
+        <button type="button" onclick="@("window.location.href='" + @Url.Action("AddOrder", "Orders", new { LastOrderid=invc[0].INVOICE_NUM}) + "'")" class="btn btn-secondary float-right">
+        <i class="fa-solid fa-cart-plus mr-3"></i> Add order
+        </button>
     </div>
 </div>
+
 <p>Invoices on record</p>
     <div id="allorders-sect">
         <table class="table table-striped">

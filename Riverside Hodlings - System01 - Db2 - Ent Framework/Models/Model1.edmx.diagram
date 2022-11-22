@@ -15,6 +15,7 @@
         <AssociationConnector Association="Riverside_HoldingsModel.FK__CLIENT_PA__CLIEN__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="Riverside_HoldingsModel.INVOICE_NUM" ManuallyRouted="false" />
         <AssociationConnector Association="Riverside_HoldingsModel.PRD_CODE" ManuallyRouted="false" />
+        <AssociationConnector Association="Riverside_HoldingsModel.FK__INVOICES__CLIENT__7C4F7684" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

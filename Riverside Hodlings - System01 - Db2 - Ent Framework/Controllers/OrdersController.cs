@@ -57,9 +57,14 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             return View(invoices);
         }
 
-        public ActionResult AddOrder()
+        public ActionResult AddOrder(string LastOrderid)
         {
-            return View();
+            var invoices = new orderDetailsVm();
+            invoices.Clients = db.CLIENTS.ToList();
+            invoices.Products = db.PRODUCTS.ToList();
+            invoices.ClientPayments = db.CLIENT_PAYMENTS.ToList();
+            invoices.Invoices = db.INVOICES.Where(o => o.INVOICE_NUM == LastOrderid).ToList();
+            return View(invoices);
         }
     }
 }
