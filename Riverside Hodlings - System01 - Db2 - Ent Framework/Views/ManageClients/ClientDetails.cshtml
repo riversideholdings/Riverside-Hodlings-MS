@@ -27,7 +27,7 @@
         <h5><i class="fa-solid fa-people-arrows mr-3"></i>@client.CONTACT_PERSON</h5>
         <br />
         <button class="btn btn-info" id="@client.CLIENT_ID" onclick="EditClient(this.id)"><i class="fa-regular fa-user-pen mr-3"></i>Edit Client</button>
-        <button class="btn btn-success" id="@client.CLIENT_ID" onclick="DownloadStatement(this.id)"><i class="fa-solid fa-file-lines mr-3"></i></i>Download Statement</button>
+        <button class="btn btn-success" id="@client.CLIENT_ID" onclick="viewStatement(this.id)"><i class="fa-solid fa-file-lines mr-3"></i>View Statement</button>
     </div>
 
     <div class="col-sm-5">
@@ -38,10 +38,10 @@
             <table class="table table-striped">
                 <thead class="bg-dark text-light">
                     <tr>
-                        <th>Order Number</th>
+                        <th>Order #</th>
                         <th class="smallscreennotshow">Date</th>
                         <th class="smallscreennotshow">Recipient</th>
-                        <th>Invoice Total</th>
+                        <th>Total</th>
                         <th>Status</th>
                         <th>Details</th>
                     </tr>
