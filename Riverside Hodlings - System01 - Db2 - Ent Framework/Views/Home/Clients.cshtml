@@ -2,14 +2,15 @@
 @using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 @{
     ViewBag.Title = "Clients";
     var cliFun = Model;
 }
+
 <style>
     @@media only screen and (max-width: 600px) {
         .smallscreennotshow {
@@ -64,7 +65,7 @@
                     <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("ClientDetails", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-eye"></i></button>
                 </td>
                 <td>
-                    <button class="btn btn-info" onclick="@("window.location.href='" + @Url.Action("EditClient", "ManageClients", new { clientId = client.CLIENT_ID}) + "'")"><i class="fa-regular fa-user-pen"></i></button>
+                    <button class="btn btn-info" id="@client.CLIENT_ID" onclick="EditClient(this.id)"><i class="fa-regular fa-user-pen"></i></button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-danger" id="@client.CLIENT_ID" onclick="deleteClient(this.id)" data-toggle="modal" data-target="#ClientModalCenter">
@@ -85,7 +86,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                <h4 class="modal-title" id="exampleModalLongTitle"><i class="fa-solid fa-user-xmark mr-3"></i>Delete</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -112,17 +113,13 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <h4 class="modal-title" id="exampleModalLongTitle"><i class="fa-solid fa-user-pen mr-3"></i> Edit Client</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div id="clientModalbody" class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="confirmClientToDB()" data-dismiss="modal" class="btn btn-success">Yes</button>
-                <a href="/Home/Clients" class="btn btn-danger">Cancel</a>
+
             </div>
         </div>
     </div>
@@ -158,14 +155,16 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
         $.ajax({
             url: '/ManageClients/EditClient/',
             type: 'GET',
-            data: { id: cliId },
+            data: {
+                id: cliId
+            },
             success: function (response) {
                 $('#clientModalbody').html(response);
                 $('#editClientModal').modal('show');
             },
-            error: function () {
-                alert("There is some problem in the Details service! Check Controller or view.")
-            }
+            //error: function () {
+            //    alert("There is some problem in the mangeclients service! Check Controller or view.")
+            //}
         });
     }
 </script>

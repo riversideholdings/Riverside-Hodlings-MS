@@ -76,20 +76,4 @@
             }
         });
     }
-
-    @* $("#addClient").on("click", () => {
-        $.post({
-            url: "@Url.Action("AddPlaylist", "Spotify")",
-            data: {
-                name: $("#playlist-name").val()
-            },
-            success: (data) => {
-                let msg = JSON.parse(data);
-
-                alert(msg.message);
-                GetPlaylists();
-            }
-        });
-    });*@
-
 </script>

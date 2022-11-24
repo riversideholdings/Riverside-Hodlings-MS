@@ -30,13 +30,8 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
         //add client to db
         public string addClToDb(string name, string phone, string email, string physicalAddress, string contactPerson, DateTime date, string clientId)
         {
-            //form a new client id
             var namestring = name.Substring(0, 3).ToUpper();
-            //var lastcli = db.CLIENTS.OrderByDescending(C => C.DATE_ADDED).Take(1).ToList();
-            //var numstr = Convert.ToInt32(lastcli[0].CLIENT_ID.Substring(3, 4));
-            //var newnum = numstr + 1;
-            //string clientId = namestring + numstr + "RH";
-            
+          
             db.CLIENTS.Add(new CLIENT { 
                 CLIENT_ID = namestring+clientId+"RH",
                 NAME = name,
@@ -71,10 +66,36 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             return JsonConvert.SerializeObject(new { message = myessage});
         }
 
-        public ActionResult EditClient()
+        public ActionResult EditClient(string id)
         {
+            var client = db.CLIENTS.Where(c => c.CLIENT_ID == id).ToList();
+            return View(client);
+        }
 
-            return View();
+        public string ConfirmEdit(string clientId, string name, string phone, string email, string physicalAddress, string contactPerson)
+        {
+            var clientToupdate = db.CLIENTS.Where(x => x.CLIENT_ID == clientId).FirstOrDefault();
+
+            clientToupdate.CLIENT_ID = clientId;
+            clientToupdate.NAME = name;
+            clientToupdate.PHONE_NUMBER = phone;
+            clientToupdate.EMAIL = email;
+            clientToupdate.ADDRESS = physicalAddress;
+            clientToupdate.CONTACT_PERSON = contactPerson;
+
+            var myessage = "";
+            try
+            {
+                db.SaveChanges();
+                myessage = name + " has been successfully updated!";
+            }
+            catch
+            {
+                myessage = name + " Cannot be updated. Please check for errors and try again!";
+            }
+
+
+            return JsonConvert.SerializeObject(new { message = myessage });
         }
     }
 }

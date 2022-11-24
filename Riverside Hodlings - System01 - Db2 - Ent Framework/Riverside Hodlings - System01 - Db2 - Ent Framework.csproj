@@ -214,8 +214,6 @@
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
-    <Content Include="customscript\bootstrap.min.js" />
-    <Content Include="customscript\jquery.min.js" />
     <Content Include="customscript\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
