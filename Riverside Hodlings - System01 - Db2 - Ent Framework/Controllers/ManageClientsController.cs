@@ -14,8 +14,12 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
         private Riverside_HoldingsEntities1 db = new Riverside_HoldingsEntities1();
         public ActionResult ClientDetails(string clientId)
         {
-
-            return View();
+            var client = new ClientsVm();
+            client.Clients = db.CLIENTS.Where(cli => cli.CLIENT_ID == clientId).ToList();
+            client.Invoices = db.INVOICES.Where(i => i.CLIENT_ID == clientId).OrderByDescending(C => C.INVOICE_DATE).ToList();
+            client.ClientPayments = db.CLIENT_PAYMENTS.Where(py => py.CLIENT_ID == clientId).OrderByDescending(p => p.DATE).ToList();
+            client.ClInvoiceNotes = db.INVOICE_NOTES.ToList();
+            return View(client);
         }
 
         //open client add form

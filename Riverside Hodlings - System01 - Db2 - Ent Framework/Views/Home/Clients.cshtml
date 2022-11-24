@@ -102,7 +102,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="confirmClientToDB()" data-dismiss="modal" class="btn btn-success">Yes</button>
-                <a href="/Home/Clients" class="btn btn-danger">Cancel</a>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">Cancel</button>
             </div>
         </div>
     </div>
@@ -128,7 +128,6 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 <script type="text/javascript">
     function deleteClient(clientId) {
         var clientIDspan = document.getElementById("cliID");
-        var clientName = document.getElementById("cliNamesp");
 
         clientIDspan.innerHTML = clientId;
     }
@@ -162,9 +161,9 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
                 $('#clientModalbody').html(response);
                 $('#editClientModal').modal('show');
             },
-            //error: function () {
-            //    alert("There is some problem in the mangeclients service! Check Controller or view.")
-            //}
+            error: function () {
+                alert("There is some problem in the mangeclients service! Check Controller or view.")
+            }
         });
     }
 </script>

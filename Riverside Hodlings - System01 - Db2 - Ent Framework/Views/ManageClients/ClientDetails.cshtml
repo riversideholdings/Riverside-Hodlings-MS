@@ -1,7 +1,76 @@
-﻿
+﻿@model Riverside_Hodlings___System01___Db2___Ent_Framework.Models.ClientsVm
 @{
     ViewBag.Title = "ClientDetails";
+
+    var client = Model.Clients[0];
 }
 
-<h2>Client: </h2>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<a class="btn btn-dark float-right" style="position:fixed; right:15px; z-index:6;" href="/Home/Clients"><i class="fa-solid fa-chevron-left"></i></a>
+<br />
+
+<h3><i class="fa-solid fa-user mr-3"></i>@client.NAME</h3>
+<hr />
+<div class="row">
+    <div class="col-sm-3">
+        <center><img src="~/icons/userClient.png" alt="box" width="18%" /></center>
+        <h4 class="crdheading">Client Details</h4>
+        <h5><i class="fa-regular fa-calendar-plus mr-3"></i>Client Created: @client.DATE_ADDED</h5>
+        <h5><i class="fa-solid fa-id-card mr-3"></i>@client.CLIENT_ID</h5>
+        <h5><i class="fa-solid fa-user mr-3"></i>@client.NAME</h5>
+        <h5><i class="fa-solid fa-envelope mr-3"></i>@client.EMAIL</h5>
+        <h5><i class="fa-solid fa-phone mr-3"></i>@client.PHONE_NUMBER</h5>
+        <h5><i class="fa-solid fa-location-dot mr-3"></i>@client.ADDRESS</h5>
+        <h5><i class="fa-solid fa-people-arrows mr-3"></i>@client.CONTACT_PERSON</h5>
+        <br />
+        <button class="btn btn-info" id="@client.CLIENT_ID" onclick="EditClient(this.id)"><i class="fa-regular fa-user-pen mr-3"></i>Edit Client</button>
+    </div>
+    <div class="col-sm-4">
+        <center><img src="~/icons/invoice.png" alt="box" width="18%" /></center>
+        <h4 class="crdheading">@client.NAME's' Invoices</h4>
+    </div>
+    <div class="col-sm-4">
+        <center><img src="~/icons/payment-method.png" alt="box" width="18%" /></center>
+        <h4 class="crdheading">@client.NAME's Payments</h4>
+    </div>
+</div>
+
+<!--edit Modal -->
+<div class="modal fade" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle"><i class="fa-solid fa-user-pen mr-3"></i> Edit Client</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="clientModalbody" class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function EditClient(cliId) {
+        $.ajax({
+            url: '/ManageClients/EditClient/',
+            type: 'GET',
+            data: {
+                id: cliId
+            },
+            success: function (response) {
+                $('#clientModalbody').html(response);
+                $('#editClientModal').modal('show');
+            },
+            error: function () {
+                alert("There is some problem in the mangeclients service! Check Controller or view.")
+            }
+        });
+    }
+</script>

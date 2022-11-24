@@ -226,11 +226,14 @@
     <Content Include="icons\cancel.png" />
     <Content Include="icons\checked.png" />
     <Content Include="icons\discount.png" />
+    <Content Include="icons\invoice.png" />
+    <Content Include="icons\payment-method.png" />
     <Content Include="icons\pending.png" />
     <Content Include="icons\push-cart.png" />
     <Content Include="icons\riverside logo loader.gif" />
     <Content Include="icons\shopping-cart.png" />
     <Content Include="icons\user.png" />
+    <Content Include="icons\userClient.png" />
     <Content Include="logo-transparent.png" />
     <Content Include="logo.png" />
     <Content Include="Models\Model1.Context.tt">
