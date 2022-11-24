@@ -27,14 +27,94 @@
         <h5><i class="fa-solid fa-people-arrows mr-3"></i>@client.CONTACT_PERSON</h5>
         <br />
         <button class="btn btn-info" id="@client.CLIENT_ID" onclick="EditClient(this.id)"><i class="fa-regular fa-user-pen mr-3"></i>Edit Client</button>
+        <button class="btn btn-success" id="@client.CLIENT_ID" onclick="DownloadStatement(this.id)"><i class="fa-solid fa-file-lines mr-3"></i></i>Download Statement</button>
     </div>
-    <div class="col-sm-4">
-        <center><img src="~/icons/invoice.png" alt="box" width="13%" /></center>
+
+    <div class="col-sm-5">
+        <center><img src="~/icons/invoice.png" alt="box" width="10%" /></center>
         <h4 class="crdheading">@client.NAME's Invoices</h4>
+
+        <div class="allorders-sect-cli">
+            <table class="table table-striped">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th>Order Number</th>
+                        <th class="smallscreennotshow">Date</th>
+                        <th class="smallscreennotshow">Recipient</th>
+                        <th>Invoice Total</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var inv in Model.Invoices)
+                    {
+                        <tr>
+                            <td style="color: #3E85CE; font-weight: bold;">@inv.INVOICE_NUM</td>
+                            <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
+
+                            @foreach (var cli in Model.Clients)
+                            {
+                                if (inv.CLIENT_ID == cli.CLIENT_ID)
+                                {
+                                    <td class="smallscreennotshow">@cli.NAME</td>
+                                }
+                            }
+                            <td>R @inv.INVOICE_TOTAL</td>
+
+                            @if (inv.PAYMENT_STATUS == "Paid                ")
+                            {
+                                <td class="greenclr">
+                                    <span><img src="~/icons/checked.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b>
+                                </td>
+                            }
+                            else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
+                            {
+                                <td class="orangepclr">
+                                    <span><img src="~/icons/pending.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="redclr">
+                                    <span><img src="~/icons/cancel.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b>
+                                </td>
+                            }
+
+                            <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <div class="col-sm-4">
         <center><img src="~/icons/payment-method.png" alt="box" width="13%" /></center>
         <h4 class="crdheading">@client.NAME's Payments</h4>
+
+        <div class="allorders-sect-cli">
+            <table class="table table-striped">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th>DATE</th>
+                        <th>DESCRIPTION</th>
+                        <th>AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pay in Model.ClientPayments)
+                    {
+                        <tr>
+                            <td>@pay.DATE</td>
+                            <td>@pay.DESCRIPTION</td>
+                            <td>@pay.AMOUNT</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

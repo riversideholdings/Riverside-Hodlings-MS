@@ -99,6 +99,33 @@ textarea {
     background-color: grey;  
     transition: ease-in 0.2s;
 }
+/* for client*/
+.allorders-sect-cli {
+    height: 45vh;
+    overflow-y: scroll;
+    border-style: solid;
+    border-color: grey;
+    border-width: 0.2px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px 1px #888888;
+}
+.allorders-sect-cli::-webkit-scrollbar {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.allorders-sect-cli::-webkit-scrollbar-thumb {
+    background-color: lightgray;   
+    border-style: solid;
+    border-color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width:20%;
+}
+.allorders-sect-cli::-webkit-scrollbar-thumb:hover {
+    background-color: grey;  
+    transition: ease-in 0.2s;
+}
+/*End*/
 
 #tbheaders{
     position: fixed;
