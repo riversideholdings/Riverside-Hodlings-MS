@@ -7,47 +7,53 @@
 }
 
 <h2><i class="fa-solid fa-user-plus mr-3"></i> Add a new Client</h2>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="lastcli">last client added</label>
+            <input type="text" class="form-control" disabled id="lastcli" name="lastcliient" value="@lastcli[0].CLIENT_ID" />
+        </div>
 
-<div class="form-group">
-    <label for="lastcli">last client added</label>
-    <input type="text" class="form-control" disabled id="lastcli" name="lastcliient" value="@lastcli[0].CLIENT_ID"/>
-</div>
+        <h3>New client details</h3>
+        <div class="form-group">
+            <label for="DateAdded">Date Today: </label>
+            <input type="date" class="form-control" id="DateAdded" name="date" />
+        </div>
 
-<h3>New client details</h3>
-<div class="form-group">
-    <label for="DateAdded">Date Today</label>
-    <input type="date" class="form-control" id="DateAdded" name="date" />
+        <div class="form-group">
+            <label for="newcli">New client id: </label>
+            <input type="text" class="form-control" disabled id="newcli" name="newcliid" value="@newIdd" />
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="cliName">Name and surname</label>
+            <input type="text" class="form-control" id="cliName" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="phoneNum">Phone number</label>
+            <input type="text" class="form-control" id="phoneNum" name="phone" />
+        </div>
+        <div class="form-group">
+            <label for="emailAddress">Email Address</label>
+            <input type="email" class="form-control" id="emailAddress" name="email" />
+        </div>
+        <div class="form-group">
+            <label for="address">Physical Address</label>
+            <input type="text" class="form-control" id="address" name="physicalAddress" />
+        </div>
+        <div class="form-group">
+            <label for="contactP">Contact Person</label>
+            <input type="text" class="form-control" id="contactP" name="contactPerson" />
+        </div>
+        <button type="button" id="addClient" onclick="addClientToDB()" class="btn btn-primary"><i class="fa-solid fa-user-plus mr-3"></i> Add Client</button>
+        <a href="/Home/Clients" class="btn btn-danger"><i class="fa-solid fa-xmark mr-3"></i> Cancel</a>
+    </div>
 </div>
-
-<div class="form-group">
-    <label for="newcli">New client id</label>
-    <input type="text" class="form-control" disabled id="newcli" name="newcliid" value="@newIdd" />
-</div>
-
-<div class="form-group">
-    <label for="cliName">Name and surname</label>
-    <input type="text" class="form-control" id="cliName" name="name" />
-</div>
-<div class="form-group">
-    <label for="phoneNum">Phone number</label>
-    <input type="text" class="form-control" id="phoneNum" name="phone" />
-</div>
-<div class="form-group">
-    <label for="emailAddress">Email Address</label>
-    <input type="email" class="form-control" id="emailAddress" name="email" />
-</div>
-<div class="form-group">
-    <label for="address">Physical Address</label>
-    <input type="text" class="form-control" id="address" name="physicalAddress" />
-</div>
-<div class="form-group">
-    <label for="contactP">Contact Person</label>
-    <input type="text" class="form-control" id="contactP" name="contactPerson" />
-</div>
-<button type="button" id="addClient" onclick="addClientToDB()" class="btn btn-primary"><i class="fa-solid fa-user-plus mr-3"></i> Add Client</button>
-
 
 <script type="text/javascript">
+    var dateinput = document.getElementById("DateAdded");
+
     function addClientToDB() {
         $.post({
             url: "@Url.Action("addClToDb", "ManageClients")",
@@ -64,6 +70,9 @@
                 let msg = JSON.parse(data);
                 window.location.href = "/Home/Clients";
                 alert(msg.message);
+            },
+            error: () => {
+                alert("Please make sure all fields and values are filled in correctly");
             }
         });
     }

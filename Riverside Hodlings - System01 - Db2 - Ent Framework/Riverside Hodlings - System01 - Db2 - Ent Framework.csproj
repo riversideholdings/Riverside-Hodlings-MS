@@ -232,6 +232,7 @@
     <Content Include="icons\push-cart.png" />
     <Content Include="icons\riverside logo loader.gif" />
     <Content Include="icons\shopping-cart.png" />
+    <Content Include="icons\user.png" />
     <Content Include="logo-transparent.png" />
     <Content Include="logo.png" />
     <Content Include="Models\Model1.Context.tt">
@@ -345,7 +346,6 @@
     <Content Include="Views\Orders\AllOrders.cshtml" />
     <Content Include="Views\ManageClients\AddClient.cshtml" />
     <Content Include="Views\ManageClients\EditClient.cshtml" />
-    <Content Include="Views\ManageClients\DeleteClient.cshtml" />
     <Content Include="Views\ManageClients\ClientDetails.cshtml" />
     <Content Include="Views\Orders\OrderDetails.cshtml" />
     <Content Include="Views\Orders\AddOrder.cshtml" />

@@ -49,21 +49,29 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 
             db.SaveChanges();
 
-            return JsonConvert.SerializeObject(new { message = "New client added!" });
+            return JsonConvert.SerializeObject(new { message = name + " has been added to clients successfully!" });
+        }
+
+        public string ConfirmDelete(string clId)
+        {
+            var clientToDelete = db.CLIENTS.Where(x => x.CLIENT_ID == clId).FirstOrDefault();
+            db.CLIENTS.Remove(clientToDelete);
+            var myessage = "";
+            try
+            {
+                db.SaveChanges();
+                myessage = clientToDelete.NAME.Replace(" ", "") + " has been successfully deleted!";
+            }
+            catch
+            {
+                myessage = clientToDelete.NAME.Replace(" ", "") + " Cannot be deleted, because they have invoices that belong to them in the database! Delete restricted, to allow this client to be deleted, please alter database.";
+            }
+            
+
+            return JsonConvert.SerializeObject(new { message = myessage});
         }
 
         public ActionResult EditClient()
-        {
-
-            return View();
-        }
-        public ActionResult DeleteClient(string clientId)
-        {
-            var client = db.CLIENTS.ToList().Where(c => c.CLIENT_ID == clientId);
-            return View(client.ToList());
-        }
-
-        public ActionResult ConfirmDelete()
         {
 
             return View();

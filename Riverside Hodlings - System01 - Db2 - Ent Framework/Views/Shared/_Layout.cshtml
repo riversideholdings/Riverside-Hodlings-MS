@@ -26,28 +26,28 @@
         </div>
         <div class="brading"><h4><b>Riverside Holdings (pty) ltd.</b></h4></div>
         <div id="log-nav">
-            <img src="~/logo.png" alt="logo" class="br-image"/>
+            <img src="~/logo.png" alt="logo" class="br-image" />
         </div>
     </div>
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu float-left">
-             </div>
-                <h1><a href="/Home/Index" class="logo">Riverside Holdings</a></h1>
-                <ul class="list-unstyled components mb-5">
-                    <li>
-                        <a href="/Home/Index"><span class="fa fa-tachometer mr-3"></span> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="/Home/Clients"><span class="fa fa-users mr-3"></span> Manage Clients</a>
-                    </li>
-                    <li>
-                        <a href="/Home/Finance"><span class="fa-solid fa-chart-column mr-3"></span> Financials</a>
-                    </li>
-                    <li>
-                        <a href="/Orders/AllOrders"><span class="fa-solid fa-dolly mr-3"></span> All Orders</a>
-                    </li>
-                </ul>
+            </div>
+            <h1><a href="/Home/Index" class="logo">Riverside Holdings</a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li>
+                    <a href="/Home/Index"><span class="fa fa-tachometer mr-3"></span> Dashboard</a>
+                </li>
+                <li>
+                    <a href="/Home/Clients"><span class="fa fa-users mr-3"></span> Manage Clients</a>
+                </li>
+                <li>
+                    <a href="/Home/Finance"><span class="fa-solid fa-chart-column mr-3"></span> Financials</a>
+                </li>
+                <li>
+                    <a href="/Orders/AllOrders"><span class="fa-solid fa-dolly mr-3"></span> All Orders</a>
+                </li>
+            </ul>
         </nav>
         <div id="content" class="p-4 p-md-5 pt-5">
             <br /><br />
@@ -58,17 +58,9 @@
             </footer>
         </div>
     </div>
-    @*<script src="~/Scripts/popper.js"></script>*@
-    <script src="~/customscript/jquery.min.js"></script>
-    <script src="~/customscript/main.js"></script>
-    @*<script src="~/customscript/bootstrap.min.js"></script>*@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993"
-            integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA=="
-            data-cf-beacon='{"rayId":"76889372cf139cb4","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.0","si":100}'
-            crossorigin="anonymous">
-    </script>
+    <script src="~/customscript/main.js"></script>
 </body>
 </html>
