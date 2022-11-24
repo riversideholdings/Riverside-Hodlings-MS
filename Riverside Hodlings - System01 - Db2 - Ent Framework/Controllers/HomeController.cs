@@ -47,7 +47,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            return View(clients.ToList().ToPagedList(pageNumber, pageSize));
+            return View(clients.OrderByDescending(c => c.DATE_ADDED).ToList().ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Finance()

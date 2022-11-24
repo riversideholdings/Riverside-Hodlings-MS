@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Add";
     var lastcli = Model.Clients.Take(1).ToList();
+    var shhort = Convert.ToInt32(lastcli[0].CLIENT_ID.Substring(3,4));
+    var newIdd = shhort + 1;
 }
 
 <h2><i class="fa-solid fa-user-plus mr-3"></i> Add a new Client</h2>
@@ -12,6 +14,15 @@
 </div>
 
 <h3>New client details</h3>
+<div class="form-group">
+    <label for="DateAdded">Date Today</label>
+    <input type="date" class="form-control" id="DateAdded" name="date" />
+</div>
+
+<div class="form-group">
+    <label for="newcli">New client id</label>
+    <input type="text" class="form-control" disabled id="newcli" name="newcliid" value="@newIdd" />
+</div>
 <div class="form-group">
     <label for="cliName">Name and surname</label>
     <input type="text" class="form-control" id="cliName" name="name" />
@@ -32,4 +43,43 @@
     <label for="contactP">Contact Person</label>
     <input type="text" class="form-control" id="contactP" name="contactPerson" />
 </div>
-<button type="button" class="btn btn-primary"><i class="fa-solid fa-user-plus mr-3"></i> Add Client</button>
+<button type="button" id="addClient" onclick="addClientToDB()" class="btn btn-primary"><i class="fa-solid fa-user-plus mr-3"></i> Add Client</button>
+
+
+<script type="text/javascript">
+    function addClientToDB() {
+        $.post({
+            url: "@Url.Action("addClToDb", "ManageClients")",
+            data: {
+                clientId: $("#newcli").val(),
+                name: $("#cliName").val(),
+                phone: $("#phoneNum").val(),
+                email: $("#emailAddress").val(),
+                physicalAddress: $("#address").val(),
+                contactPerson: $("#contactP").val(),
+                date: $("#DateAdded").val()
+            },
+            success: (data) => {
+                let msg = JSON.parse(data);
+                window.location.href = "/Home/Clients";
+                alert(msg.message);
+            }
+        });
+    }
+
+    @* $("#addClient").on("click", () => {
+        $.post({
+            url: "@Url.Action("AddPlaylist", "Spotify")",
+            data: {
+                name: $("#playlist-name").val()
+            },
+            success: (data) => {
+                let msg = JSON.parse(data);
+
+                alert(msg.message);
+                GetPlaylists();
+            }
+        });
+    });*@
+
+</script>
