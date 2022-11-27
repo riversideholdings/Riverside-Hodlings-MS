@@ -1,0 +1,106 @@
+﻿@model Riverside_Hodlings___System01___Db2___Ent_Framework.Models.orderDetailsVm
+@{
+    ViewBag.Title = "AddInvItems";
+    Layout = null;
+
+    var lasinvid = Model.Invoices[0].INVOICE_NUM;
+    var x = Convert.ToInt32(lasinvid.Replace("RH", ""));
+    var y = x + 1;
+    var newinvoice = "RH0" + y;
+}
+
+<div>
+    <div class="form-group">
+        <label for="phoneNum">You are adding order items for:</label>
+        <input type="text" class="form-control" id="invId" name="invoiceId" disabled value="@newinvoice"/>
+    </div>
+    <div class="form-group">
+        <label for="product">Select Product</label>
+        <select type="text" class="form-control" id="product" name="prod">
+            <option value="Select Product">Select Product</option>
+            @foreach (var prod in Model.Products)
+            {
+                <option value="@prod.PRD_CODE">@prod.PRODUCT_NAME</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="phoneNum">Quantity</label>
+        <input type="text" class="form-control" id="qtyp" name="quantity" />
+    </div>
+    <button type="button" id="addProd" onclick="additemToDB()" class="btn btn-primary"><i class="fa-solid fa-cart-plus mr-3"></i>Add product to order</button>
+</div>
+
+<table id="tblitem" class="table table-bordered table-striped table-responsive table-hover">
+    <thead>
+        <tr>
+            <th align="left" class="productth col-md-6">Item Name</th>
+            <th align="left" class="productth col-md-6">Price</th>
+            <th align="left" class="productth col-md-6">Remove</th>
+        </tr>
+    </thead>
+    <tbody id="itm-body">
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+
+    function additemToDB() {
+        $.post({
+            url: "@Url.Action("confirmAdditem", "Orders")",
+            data: {
+                product: $("#product").val(),
+                quantity: $("#qtyp").val(),
+                invoiceID: $("#invId").val()
+            },
+            success: (data) => {
+                let msg = JSON.parse(data);
+                alert(msg.message)
+                //LoadData();
+            },
+            error: () => {
+                alert("Please make sure all fields and values are filled in correctly");
+            }
+        });
+    }
+
+    @*function LoadData() {
+                $.get({
+                    url: "@Url.Action("GetitemsTable", "Orders")",
+                    data:{
+                        id: @newinvoice 
+                    },
+                    success: (proddata) => {
+                        const result = JSON.stringify(proddata);
+                        let itemprod = JSON.parse(result);
+                        let invItem = itemprod.INVOICE_ITEM;
+
+                        console.log(itemprod);
+                        $("#itm-body").empty();
+
+                        $(invItem).each((i, e) => {
+                            var prodPrice = 0;
+                            let x = itemprod.PRODUCTS;
+
+                            if ($("#invRecip").val() == "Selling Price") {
+                                prodPrice = x.SELLING_PRICE;
+                            }
+                            else if ($("#invRecip").val() == "Wholesale Price") {
+                                prodPrice = x.WHOLESALE_PRICE;
+                            }
+                            else if ($("#invRecip").val() == "Waterpreneur Price") {
+                                prodPrice = x.WATERPRENEUR_PRICE;
+                            }
+                            else {
+                                prodPrice = x.WATERPRENEUR_PRICE;
+                            }
+
+                            $("#itm-body").append(`<tr> <td>${x.PRODUCT_NAME}</td>
+                            <td>${prodPrice}</td> 
+                            <td><button id="${e.INVOICE_ITEM.ITEM_ID}" onclick="deleteitemfromDb(this.id)" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td></tr>`);
+                        });
+                    }
+                });
+            }*@
+</script>

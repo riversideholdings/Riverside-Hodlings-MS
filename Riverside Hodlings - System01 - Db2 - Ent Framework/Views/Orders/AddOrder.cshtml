@@ -9,6 +9,10 @@
     var prod = Model.Products;
 }
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <h2><i class="fa-solid fa-dolly mr-3"></i> Add a new Order</h2>
 <hr />
 <div class="row">
@@ -45,15 +49,15 @@
                 <option value="Select a recipient">Select a price class</option>
                 <option value="Selling Price">Selling Price</option>
                 <option value="Wholesale Price">Wholesale Price</option>
-                <option value="Waterpreneur Price  ">Waterpreneur Price</option>
+                <option value="Waterpreneur Price">Waterpreneur Price</option>
                 <option value="Registration">Registration</option>
             </select>
         </div>
         <div class="form-group">
-            <button type="button" id="@newinvoice" class="btn btn-primary"><i class="fa-solid fa-cart-plus mr-3"></i>Add item(s)</button>
+            <button type="button" id="@newinvoice" onclick="additemopen(this.id)" class="btn btn-primary"><i class="fa-solid fa-cart-plus mr-3"></i>Add item(s)</button>
         </div>
 
-        </div>
+    </div>
     <div class="col-sm-3">
         <h3>Recipient details</h3>
 
@@ -87,3 +91,40 @@
         <a href="/Orders/AllOrders" class="btn btn-danger"><i class="fa-solid fa-xmark mr-3"></i> Cancel</a>
     </div>
 </div>
+
+<!--add Modal -->
+<div class="modal fade" id="addItemtoDb" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle"><i class="fa-solid fa-user-pen mr-3"></i> Add Items</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="addinvItemsbody" class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function additemopen(cliId) {
+        $.ajax({
+            url: '/Orders/AddInvItems/',
+            type: 'GET',
+            data: {
+                clId: cliId
+            },
+            success: function (response) {
+                $('#addinvItemsbody').html(response);
+                $('#addItemtoDb').modal('show');
+            },
+            error: function () {
+                alert("There is some problem in the mangeclients service! Check Controller or view.")
+            }
+        });
+    }
+
+</script>

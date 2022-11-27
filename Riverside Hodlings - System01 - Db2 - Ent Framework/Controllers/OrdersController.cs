@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Riverside_Hodlings___System01___Db2___Ent_Framework.Models;
 using PagedList;
+using Newtonsoft.Json;
 
 namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
 {
@@ -66,5 +67,44 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             invoices.Invoices = db.INVOICES.Where(o => o.INVOICE_NUM == LastOrderid).ToList();
             return View(invoices);
         }
+
+        public ActionResult AddInvItems(string clId)
+        {
+            var prod = new orderDetailsVm();
+            prod.Clients = db.CLIENTS.ToList();
+            prod.Products = db.PRODUCTS.ToList();
+            prod.ClientPayments = db.CLIENT_PAYMENTS.ToList();
+            prod.Invoices = db.INVOICES.OrderByDescending(i => i.INVOICE_NUM).Take(1).ToList();
+            return View(prod);
+        }
+
+        public ActionResult confirmAdditem(string product, int quantity, string invoiceID)
+        {
+            string message = "";
+
+            if (product != null)
+            {
+                db.INVOICE_ITEM.Add(new INVOICE_ITEM { QUANTITY = quantity, PRD_CODE = product, INVOICE_NUM = invoiceID});
+                db.SaveChanges();
+            }
+            else
+            {
+                message = "Database cannot accept null values";
+            }
+
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+
+        //display items
+        public JsonResult GetitemsTable(string id)
+        {
+            //----------- Edit Here -----------
+            var prod = new orderDetailsVm();
+            prod.Products = db.PRODUCTS.ToList();
+            prod.Invoice_itm = db.INVOICE_ITEM.Where(i => i.INVOICE_NUM == id).ToList();
+
+            return Json(prod, JsonRequestBehavior.AllowGet);
+        }
     }
+
 }

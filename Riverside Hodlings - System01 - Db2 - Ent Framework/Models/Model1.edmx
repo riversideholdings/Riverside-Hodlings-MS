@@ -93,18 +93,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVOICE_I__INVOI__7D439ABD">
-          <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="0..1" />
-          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INVOICES">
-              <PropertyRef Name="INVOICE_NUM" />
-            </Principal>
-            <Dependent Role="INVOICE_ITEM">
-              <PropertyRef Name="INVOICE_NUM" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__INVOICES__CLIENT__7C4F7684">
           <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
           <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="*" />
@@ -114,18 +102,6 @@
             </Principal>
             <Dependent Role="INVOICES">
               <PropertyRef Name="CLIENT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="INVOICE_NUM">
-          <End Role="INVOICES" Type="Self.INVOICES" Multiplicity="0..1" />
-          <End Role="INVOICE_ITEM" Type="Self.INVOICE_ITEM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="INVOICES">
-              <PropertyRef Name="INVOICE_NUM" />
-            </Principal>
-            <Dependent Role="INVOICE_ITEM">
-              <PropertyRef Name="INVOICE_NUM" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -153,17 +129,9 @@
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="CLIENT_PAYMENTS" EntitySet="CLIENT_PAYMENTS" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVOICE_I__INVOI__7D439ABD" Association="Self.FK__INVOICE_I__INVOI__7D439ABD">
-            <End Role="INVOICES" EntitySet="INVOICES" />
-            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
-          </AssociationSet>
           <AssociationSet Name="FK__INVOICES__CLIENT__7C4F7684" Association="Self.FK__INVOICES__CLIENT__7C4F7684">
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="INVOICES" EntitySet="INVOICES" />
-          </AssociationSet>
-          <AssociationSet Name="INVOICE_NUM" Association="Self.INVOICE_NUM">
-            <End Role="INVOICES" EntitySet="INVOICES" />
-            <End Role="INVOICE_ITEM" EntitySet="INVOICE_ITEM" />
           </AssociationSet>
           <AssociationSet Name="PRD_CODE" Association="Self.PRD_CODE">
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />

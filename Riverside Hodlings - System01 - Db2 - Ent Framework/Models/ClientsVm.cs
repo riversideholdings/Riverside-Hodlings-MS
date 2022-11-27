@@ -11,5 +11,6 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Models
         public List<CLIENT> Clients { get; set; }
         public List<CLIENT_PAYMENTS> ClientPayments { get; set; }
         public List<INVOICE_NOTES> ClInvoiceNotes { get; set; }
+        public string name { get; set; }
     }
 }
