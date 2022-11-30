@@ -86,6 +86,7 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
             {
                 db.INVOICE_ITEM.Add(new INVOICE_ITEM { QUANTITY = quantity, PRD_CODE = product, INVOICE_NUM = invoiceID});
                 db.SaveChanges();
+                message = product + " Added";
             }
             else
             {
@@ -98,6 +99,9 @@ namespace Riverside_Hodlings___System01___Db2___Ent_Framework.Controllers
         //display items
         public JsonResult GetitemsTable(string id)
         {
+            //List<PRODUCT> ExampleTables = new List<PRODUCT>();
+            //ExampleTables = db.PRODUCTS.ToList();
+
             //----------- Edit Here -----------
             var prod = new orderDetailsVm();
             prod.Products = db.PRODUCTS.ToList();

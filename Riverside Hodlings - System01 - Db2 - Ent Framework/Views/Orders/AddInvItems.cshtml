@@ -55,9 +55,9 @@
                 invoiceID: $("#invId").val()
             },
             success: (data) => {
-                let msg = JSON.parse(data);
-                alert(msg.message)
-                //LoadData();
+                console.log(data);
+                //alert(msg.message)
+                LoadData();
             },
             error: () => {
                 alert("Please make sure all fields and values are filled in correctly");
@@ -65,42 +65,44 @@
         });
     }
 
-    @*function LoadData() {
+    function LoadData() {
                 $.get({
                     url: "@Url.Action("GetitemsTable", "Orders")",
                     data:{
-                        id: @newinvoice 
+                        id: $("invId").val()
                     },
                     success: (proddata) => {
-                        const result = JSON.stringify(proddata);
-                        let itemprod = JSON.parse(result);
-                        let invItem = itemprod.INVOICE_ITEM;
+                        console.log(proddata);
+                        //const result = JSON.stringify(proddata);
+                        //let itemprod = JSON.parse(result);
+                        //let invItem = itemprod.INVOICE_ITEM;
 
-                        console.log(itemprod);
+                        //console.log(itemprod);
+                        //console.log(invItem);
                         $("#itm-body").empty();
 
-                        $(invItem).each((i, e) => {
-                            var prodPrice = 0;
-                            let x = itemprod.PRODUCTS;
+                        //$(invItem).each((i, e) => {
+                        //    var prodPrice = 0;
+                        //    let x = itemprod.PRODUCTS;
 
-                            if ($("#invRecip").val() == "Selling Price") {
-                                prodPrice = x.SELLING_PRICE;
-                            }
-                            else if ($("#invRecip").val() == "Wholesale Price") {
-                                prodPrice = x.WHOLESALE_PRICE;
-                            }
-                            else if ($("#invRecip").val() == "Waterpreneur Price") {
-                                prodPrice = x.WATERPRENEUR_PRICE;
-                            }
-                            else {
-                                prodPrice = x.WATERPRENEUR_PRICE;
-                            }
+                        //    if ($("#invRecip").val() == "Selling Price") {
+                        //        prodPrice = x.SELLING_PRICE;
+                        //    }
+                        //    else if ($("#invRecip").val() == "Wholesale Price") {
+                        //        prodPrice = x.WHOLESALE_PRICE;
+                        //    }
+                        //    else if ($("#invRecip").val() == "Waterpreneur Price") {
+                        //        prodPrice = x.WATERPRENEUR_PRICE;
+                        //    }
+                        //    else {
+                        //        prodPrice = x.WATERPRENEUR_PRICE;
+                        //    }
 
-                            $("#itm-body").append(`<tr> <td>${x.PRODUCT_NAME}</td>
-                            <td>${prodPrice}</td> 
-                            <td><button id="${e.INVOICE_ITEM.ITEM_ID}" onclick="deleteitemfromDb(this.id)" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td></tr>`);
-                        });
+                        //    $("#itm-body").append(`<tr> <td>${x.PRODUCT_NAME}</td>
+                        //    <td>${prodPrice}</td> 
+                        //    <td><button id="${e.INVOICE_ITEM.ITEM_ID}" onclick="deleteitemfromDb(this.id)" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td></tr>`);
+                        //});
                     }
                 });
-            }*@
+            }
 </script>
