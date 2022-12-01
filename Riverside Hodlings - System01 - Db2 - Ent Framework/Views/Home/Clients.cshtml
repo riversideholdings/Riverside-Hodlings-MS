@@ -28,8 +28,14 @@
         @using (Html.BeginForm())
         {
             <p class="form-inline">
-                <input type="text" class="form-control" placeholder="Enter client name..." name="searchString" />&nbsp;
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass mr-3"></i>Search Client</button>
+                <div class="searchBar">
+                    <input id="searchQueryInput" type="text" name="searchString" placeholder="Enter client name..." value="" />
+                    <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                        <i class="fa-solid fa-magnifying-glass mr-3"></i>
+                    </button>
+                </div>
+                @*<input type="text" class="form-control" placeholder="Enter client name..." name="searchString" />&nbsp;
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass mr-3"></i>Search Client</button>*@
             </p>
         }
     </div>

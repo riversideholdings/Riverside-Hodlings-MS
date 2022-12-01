@@ -80,8 +80,9 @@ textarea {
     border-style: solid;
     border-color: grey;
     border-width: 0.2px;
-    border-radius: 7px;
-    box-shadow: 0px 0px 2px 2px #888888;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    /*box-shadow: 0px 0px 1px 1px #888888;*/
 }
 #allorders-sect::-webkit-scrollbar {
     border-top-right-radius: 7px;
@@ -99,15 +100,73 @@ textarea {
     background-color: grey;  
     transition: ease-in 0.2s;
 }
+
+.spacialHeader {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    background-color: dimgrey;
+    height: 35px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index:1;
+}
+.grid-item {
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 30px;
+    background-color: dimgrey;
+}
+
+.houseordSect{
+    width:100%;
+}
+
 /* for client*/
+.spacialHeader-cli {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    background-color: dimgrey;
+    height: 35px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 1;
+}
+
+.spacialHeader-cli-payments {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: dimgrey;
+    height: 35px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 1;
+}
 .allorders-sect-cli {
     height: 45vh;
     overflow-y: scroll;
     border-style: solid;
     border-color: grey;
     border-width: 0.2px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 1px 1px #888888;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    /*box-shadow: 0px 0px 1px 1px #888888;*/
 }
 .allorders-sect-cli::-webkit-scrollbar {
     border-top-right-radius: 5px;
@@ -212,3 +271,39 @@ textarea {
 .crdheading {
     font-family: Impact;
 }
+
+
+/*search bars*/
+.searchBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#searchQueryInput {
+    width: 100%;
+    height: 5rem;
+    background: #f5f5f5;
+    outline: none;
+    border-style: solid;
+    color: lightgray;
+    border-radius: 50px;
+    padding: 0 3.5rem 0 1.5rem;
+    font-size: 14px;
+}
+
+#searchQuerySubmit {
+    width: 3.5rem;
+    height: 2.8rem;
+    margin-left: -3.5rem;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+    #searchQuerySubmit:hover {
+        cursor: pointer;
+        background-color: #3E85CE;
+        transition: ease-in 0.3s;
+    }

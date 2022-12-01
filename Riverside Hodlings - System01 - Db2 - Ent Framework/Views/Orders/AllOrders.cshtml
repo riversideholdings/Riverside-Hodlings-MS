@@ -31,58 +31,59 @@
 </div>
 
 <p>Invoices on record</p>
+<div class="houseordSect">
+    <div class="spacialHeader">
+        <span class="grid-item">Order Number</span>
+        <span class="smallscreennotshow grid-item">Date</span>
+        <span class="smallscreennotshow grid-item text-center">Recipient</span>
+        <span class="smallscreennotshow grid-item"></span>
+        <span class="grid-item"><span class="smallscreennotshow">Invoice</span> Total</span>
+        <span class="grid-item">Status</span>
+        <span class="grid-item text-center">Details</span>
+    </div>
     <div id="allorders-sect">
-        <table class="table table-striped">
-            <thead class="bg-dark text-light">
-                <tr>
-                    <th>#</th>
-                    <th>Order Number</th>
-                    <th class="smallscreennotshow">Date</th>
-                    <th class="smallscreennotshow">Recipient</th>
-                    <th>Invoice Total</th>
-                    <th>Status</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
+        <table class="table table-striped">  
             <tbody>
                 @foreach (var inv in Model.Invoices)
                 {
-                    var num = inv.INVOICE_NUM.Substring(4, 7);                  
+                    var num = inv.INVOICE_NUM.Substring(4, 7);
 
-                <tr>
-                    <td><b>@num</b></td>
-                    <td style="color: #3E85CE; font-weight: bold;">@inv.INVOICE_NUM</td>
-                    <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
+                    <tr>
+                        <td><b>@num</b></td>
+                        <td style="color: #3E85CE; font-weight: bold;">@inv.INVOICE_NUM</td>
+                        <td class="smallscreennotshow">@inv.INVOICE_DATE</td>
 
-                    @foreach (var cli in Model.Clients)
-                    {
-                        if (inv.CLIENT_ID == cli.CLIENT_ID)
+                        @foreach (var cli in Model.Clients)
                         {
-                            <td class="smallscreennotshow">@cli.NAME</td>
+                            if (inv.CLIENT_ID == cli.CLIENT_ID)
+                            {
+                                <td class="smallscreennotshow">@cli.NAME</td>
+                            }
                         }
-                    }
-                    <td>R @inv.INVOICE_TOTAL</td>
+                        <td>R @inv.INVOICE_TOTAL</td>
 
-                    @if (inv.PAYMENT_STATUS == "Paid                ")
-                    {
-                        <td class="greenclr" @*width="10%"*@><span><img src="~/icons/checked.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
-                    }
-                    else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
-                    {
-                        <td class="orangepclr" @*width="10%"*@><span><img src="~/icons/pending.png" class="icnImg"/></span> <b>@inv.PAYMENT_STATUS</b></td>
-                    }
-                    else
-                    {
-                        <td class="redclr" @*width="10%"*@><span><img src="~/icons/cancel.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
-                    }
+                        @if (inv.PAYMENT_STATUS == "Paid                ")
+                        {
+                            <td class="greenclr" @*width="10%"*@><span><img src="~/icons/checked.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                        }
+                        else if (inv.PAYMENT_STATUS == "Awaiting Payment    ")
+                        {
+                            <td class="orangepclr" @*width="10%"*@><span><img src="~/icons/pending.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                        }
+                        else
+                        {
+                            <td class="redclr" @*width="10%"*@><span><img src="~/icons/cancel.png" class="icnImg" /></span> <b>@inv.PAYMENT_STATUS</b></td>
+                        }
 
-                    <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
+                        <td><button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("OrderDetails", "Orders", new { Orderid=inv.INVOICE_NUM}) + "'")"><i class="fa-regular fa-eye"></i></button></td>
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
+</div>
+
 <br />
 Page @(Model.Invoices.PageCount < Model.Invoices.PageNumber ? 0 : Model.Invoices.PageNumber) of @Model.Invoices.PageCount
 @Html.PagedListPager(Model.Invoices, page => Url.Action("AllOrders", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
